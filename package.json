@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "project:build": "nx run-many -t build",
     "api:build": "nx run check-me-api:build",
-    "api:serve": "nx run check-me-api:serve --configuration=development ",
-    "web:build": "nx run check-me-web:build",
-    "web:serve": "nx run check-me-web:serve --configuration=development ",
+    "api:serve": "nx run check-me-api:serve --configuration=development",
+    "web:build": "nx run check-me-web:build --configuration=development",
+    "web:serve": "nx run check-me-web:serve --configuration=development",
     "project:lint": "npx nx run-many -t lint"
   },
   "private": true,
