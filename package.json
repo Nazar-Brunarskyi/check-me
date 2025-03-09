@@ -4,11 +4,12 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "project:lint": "npx nx run-many -t lint",
     "api:build": "nx run check-me-api:build",
     "api:serve": "nx run check-me-api:serve --configuration=development",
+    "prepare": "husky",
     "project:build": "nx run-many -t build",
     "project:format": "prettier --write .",
-    "project:lint": "npx nx run-many -t lint",
     "web:build": "nx run check-me-web:build --configuration=development",
     "web:serve": "nx run check-me-web:serve --configuration=development"
   },
@@ -61,6 +62,7 @@
     "angular-eslint": "^19.2.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.0.0",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-preset-angular": "~14.4.0",
