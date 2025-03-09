@@ -4,7 +4,7 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
   @Get()
   get() {
-    return { status: 'OK' };
+    return { status: 'OK', message: 'Check Me API' };
   }
 
   @Get('health')

@@ -59,28 +59,28 @@ jobs:
         if: always()
         run: docker logout ${{steps.login-ecr.outputs.registry}}
 
-      # - name: Download api ECS Task Definition
-      #   run: |
-      #     aws ecs describe-task-definition \
-      #     --task-definition ${{ secrets.ECS_TASK_DEFINITION_API_NAME }} \
-      #     --query taskDefinition \
-      #     --region ${{ secrets.AWS_REGION }} > task-definition-api.json
+      - name: Download api ECS Task Definition
+        run: |
+          aws ecs describe-task-definition \
+          --task-definition ${{ secrets.ECS_TASK_DEFINITION_API_NAME }} \
+          --query taskDefinition \
+          --region ${{ secrets.AWS_REGION }} > task-definition-api.json
 
-      # - name: Fill in the new image ID in the Amazon ECS api task definition
-      #   id: task-def-api
-      #   uses: aws-actions/amazon-ecs-render-task-definition@v1
-      #   with:
-      #     task-definition: task-definition-api.json
-      #     container-name: ${{ secrets.CONTAINER_API_NAME }}
-      #     image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_API_NAME }}:${{ github.sha }}
+      - name: Fill in the new image ID in the Amazon ECS api task definition
+        id: task-def-api
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition-api.json
+          container-name: ${{ secrets.CONTAINER_API_NAME }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_API_NAME }}:${{ github.sha }}
 
-      # - name: Deploy api to ECS
-      #   uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-      #   with:
-      #     service: ${{ secrets.ECS_SERVICE_API_NAME }}
-      #     cluster: ${{ secrets.ECS_CLUSTER }}
-      #     task-definition: ${{ steps.task-def-api.outputs.task-definition }}
-      #     wait-for-service-stability: true
+      - name: Deploy api to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          service: ${{ secrets.ECS_SERVICE_API_NAME }}
+          cluster: ${{ secrets.ECS_CLUSTER }}
+          task-definition: ${{ steps.task-def-api.outputs.task-definition }}
+          wait-for-service-stability: true
 
       - name: Download web ECS Task Definition
         run: |
@@ -97,7 +97,7 @@ jobs:
           container-name: ${{ secrets.CONTAINER_WEB_NAME }}
           image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_WEB_NAME }}:${{ github.sha }}
 
-      - name: Deploy api to ECS
+      - name: Deploy web to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           service: ${{ secrets.ECS_SERVICE_WEB_NAME }}
