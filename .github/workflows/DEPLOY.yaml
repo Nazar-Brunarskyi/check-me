@@ -33,13 +33,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      # - name: Login to Amazon ECR
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v2
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build, tag, and push api image to Amazon ECR
         env:
-          # ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY_API_NAME: ${{secrets.ECR_REPOSITORY_API_NAME}}
           IMAGE_TAG: ${{github.sha}}
         run: |
@@ -48,16 +48,16 @@ jobs:
 
       - name: Build, tag, and push web image to Amazon ECR
         env:
-          # ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY_WEB_NAME: ${{secrets.ECR_REPOSITORY_WEB_NAME}}
           IMAGE_TAG: ${{github.sha}}
         run: |
           docker build -f Dockerfile.web -t $ECR_REGISTRY/$ECR_REPOSITORY_WEB_NAME:$IMAGE_TAG .
       #     docker push $ECR_REGISTRY/$ECR_REPOSITORY_WEB_NAME:$IMAGE_TAG
 
-      # - name: Logout to Amazon ECR
-      #   if: always()
-      #   run: docker logout ${{steps.login-ecr.outputs.registry}}
+      - name: Logout to Amazon ECR
+        if: always()
+        run: docker logout ${{steps.login-ecr.outputs.registry}}
 
       # - name: Download api ECS Task Definition
       #   run: |
