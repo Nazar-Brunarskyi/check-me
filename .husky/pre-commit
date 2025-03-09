@@ -1,2 +1,1 @@
-npm run project:format
 npm run project:lint
