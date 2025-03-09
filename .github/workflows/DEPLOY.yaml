@@ -37,41 +37,70 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push image to Amazon ECR
+      - name: Build, tag, and push api image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY_API_NAME: ${{secrets.ECR_REPOSITORY_API_NAME}}
-          ECR_REPOSITORY_WEB_NAME: ${{secrets.ECR_REPOSITORY_WEB_NAME}}
           IMAGE_TAG: ${{github.sha}}
         run: |
           docker build -f Dockerfile.api -t $ECR_REGISTRY/$ECR_REPOSITORY_API_NAME:$IMAGE_TAG .
-          docker build -f Dockerfile.web -t $ECR_REGISTRY/$ECR_REPOSITORY_WEB_NAME:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_API_NAME:$IMAGE_TAG
+
+      - name: Build, tag, and push web image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY_WEB_NAME: ${{secrets.ECR_REPOSITORY_WEB_NAME}}
+          IMAGE_TAG: ${{github.sha}}
+        run: |
+          docker build -f Dockerfile.web -t $ECR_REGISTRY/$ECR_REPOSITORY_WEB_NAME:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_WEB_NAME:$IMAGE_TAG
 
       - name: Logout to Amazon ECR
         if: always()
         run: docker logout ${{steps.login-ecr.outputs.registry}}
 
-      # - name: Download ECS Task Definition
+      # - name: Download api ECS Task Definition
       #   run: |
       #     aws ecs describe-task-definition \
-      #     --task-definition ${{ secrets.ECS_TASK_DEFINITION_NAME }} \
+      #     --task-definition ${{ secrets.ECS_TASK_DEFINITION_API_NAME }} \
       #     --query taskDefinition \
-      #     --region ${{ secrets.AWS_REGION }} > task-definition.json
+      #     --region ${{ secrets.AWS_REGION }} > task-definition-api.json
 
-      # - name: Fill in the new image ID in the Amazon ECS task definition
-      #   id: task-def
+      # - name: Fill in the new image ID in the Amazon ECS api task definition
+      #   id: task-def-api
       #   uses: aws-actions/amazon-ecs-render-task-definition@v1
       #   with:
-      #     task-definition: task-definition.json
-      #     container-name: ${{ secrets.CONTAINER_NAME }}
+      #     task-definition: task-definition-api.json
+      #     container-name: ${{ secrets.CONTAINER_API_NAME }}
       #     image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_API_NAME }}:${{ github.sha }}
 
-      # - name: Deploy to ECS
+      # - name: Deploy api to ECS
       #   uses: aws-actions/amazon-ecs-deploy-task-definition@v2
       #   with:
-      #     service: ${{ secrets.ECS_SERVICE }}
+      #     service: ${{ secrets.ECS_SERVICE_API_NAME }}
       #     cluster: ${{ secrets.ECS_CLUSTER }}
-      #     task-definition: ${{ steps.task-def.outputs.task-definition }}
+      #     task-definition: ${{ steps.task-def-api.outputs.task-definition }}
       #     wait-for-service-stability: true
+
+      - name: Download web ECS Task Definition
+        run: |
+          aws ecs describe-task-definition \
+          --task-definition ${{ secrets.ECS_TASK_DEFINITION_WEB_NAME }} \
+          --query taskDefinition \
+          --region ${{ secrets.AWS_REGION }} > task-definition-web.json
+
+      - name: Fill in the new image ID in the Amazon ECS web task definition
+        id: task-def-web
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition-web.json
+          container-name: ${{ secrets.CONTAINER_WEB_NAME }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_WEB_NAME }}:${{ github.sha }}
+
+      - name: Deploy api to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          service: ${{ secrets.ECS_SERVICE_WEB_NAME }}
+          cluster: ${{ secrets.ECS_CLUSTER }}
+          task-definition: ${{ steps.task-def-web.outputs.task-definition }}
+          wait-for-service-stability: true
