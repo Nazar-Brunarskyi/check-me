@@ -1,3 +1,14 @@
 {
-  "singleQuote": true
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-packagejson"],
+  "ignorePath": ".gitignore",
+  "singleQuote": true,
+  "semi": true,
+  "tabWidth": 2,
+  "printWidth": 120,
+  "trailingComma": "all",
+  "useTabs": false,
+  "jsxSingleQuote": true,
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always"
 }

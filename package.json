@@ -1,16 +1,17 @@
 {
   "name": "@check-me/source",
   "version": "0.0.0",
+  "private": true,
   "license": "MIT",
   "scripts": {
-    "project:build": "nx run-many -t build",
     "api:build": "nx run check-me-api:build",
     "api:serve": "nx run check-me-api:serve --configuration=development",
+    "project:build": "nx run-many -t build",
+    "project:format": "prettier --write .",
+    "project:lint": "npx nx run-many -t lint",
     "web:build": "nx run check-me-web:build --configuration=development",
-    "web:serve": "nx run check-me-web:serve --configuration=development",
-    "project:lint": "npx nx run-many -t lint"
+    "web:serve": "nx run check-me-web:serve --configuration=development"
   },
-  "private": true,
   "dependencies": {
     "@angular/common": "~19.2.0",
     "@angular/compiler": "~19.2.0",
@@ -23,6 +24,9 @@
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
     "axios": "^1.6.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-packagejson": "^2.5.10",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"

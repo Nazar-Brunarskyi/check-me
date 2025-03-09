@@ -54,7 +54,6 @@ jobs:
         run: |
           docker build -f Dockerfile.web -t $ECR_REGISTRY/$ECR_REPOSITORY_WEB_NAME:$IMAGE_TAG .
       #     docker push $ECR_REGISTRY/$ECR_REPOSITORY_WEB_NAME:$IMAGE_TAG
-
       - name: Logout to Amazon ECR
         if: always()
         run: docker logout ${{steps.login-ecr.outputs.registry}}
