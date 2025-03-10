@@ -1,0 +1,13 @@
+{
+  "name": "angular-theme",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/angular-theme/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["angular-theme"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

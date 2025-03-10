@@ -23,6 +23,9 @@
           }
         ],
         "styles": ["apps/check-me-web/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/check-me-web/src"]
+        },
         "scripts": []
       },
       "configurations": {
