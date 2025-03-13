@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@check-me/angular-theme/*": ["libs/angular-theme/src/*"]
+      "@check-me/angular-theme": ["libs/angular-theme/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
