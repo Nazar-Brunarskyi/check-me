@@ -1,1 +1,1 @@
-export * from './theme/get-angular-theme-providers'
+export * from './theme/get-angular-theme-providers';

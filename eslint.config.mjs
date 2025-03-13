@@ -24,8 +24,8 @@ export default [
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
           depConstraints: [
             {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
+              sourceTag: 'check-me:web',
+              onlyDependOnLibsWithTags: ['check-me:angular-theme'],
             },
           ],
         },
