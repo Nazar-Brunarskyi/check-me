@@ -1,27 +1,21 @@
 import { definePreset } from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
-import { goldenYellowColors } from './primitive/golden-yellow';
-import { primaryColors } from './semantic/primary';
+
+import { borderColors } from './colors/border';
+import { elementalColors } from './colors/elemental';
+import { primaryColors } from './colors/primary';
+
+import { button } from './components/button/button';
 
 export const theme = definePreset(Aura, {
   primitive: {
-    [goldenYellowColors.prefix]: goldenYellowColors.colors,
+    [elementalColors.prefix]: elementalColors.colors,
+    [borderColors.prefix]: borderColors.colors,
   },
   semantic: {
-    primary: primaryColors,
+    primary: primaryColors.colors,
   },
   components: {
-    button: {
-      colorScheme: {
-        light: {
-          root: {
-            primary: {
-              background: '{golden-yellow.500}',
-              borderColor: '{golden-yellow.500}',
-            },
-          },
-        },
-      },
-    },
+    button,
   },
 });

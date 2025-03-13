@@ -2,6 +2,7 @@ const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');
 const { join } = require('path');
 const PrimeUI = require('tailwindcss-primeui');
 const { getTailwindColors } = require('./src/theme/get-tailwind-colors');
+const { colorsArray } = require('./src/theme/colors-array');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ...getTailwindColors(),
+        ...getTailwindColors(colorsArray),
       },
     },
   },

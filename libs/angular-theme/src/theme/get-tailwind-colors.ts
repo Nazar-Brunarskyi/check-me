@@ -1,15 +1,12 @@
-import { IPrimitiveObject } from '../interfaces/primitive-object';
-import { goldenYellowColors } from './primitive/golden-yellow';
+import { IColorObject } from './interfaces/color-object';
 
 interface ItailwindColors {
   [key: string]: string;
 }
 
-const primitiveColorsArray: IPrimitiveObject[] = [goldenYellowColors];
-
-export const getTailwindColors = () => {
+export const getTailwindColors = (colorsArray: IColorObject[]) => {
   const colors: ItailwindColors = {};
-  primitiveColorsArray.forEach((color) => {
+  colorsArray.forEach((color) => {
     const { prefix, colors: colorValues } = color;
 
     for (const key in colorValues) {
