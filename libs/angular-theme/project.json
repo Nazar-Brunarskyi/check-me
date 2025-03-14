@@ -4,7 +4,7 @@
   "sourceRoot": "libs/angular-theme/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["check-me:angular-theme"],
+  "tags": ["scope:angular-theme"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"
