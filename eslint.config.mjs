@@ -24,8 +24,20 @@ export default [
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
           depConstraints: [
             {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
+              sourceTag: 'scope:models',
+              onlyDependOnLibsWithTags: ['scope:models'],
+            },
+            {
+              sourceTag: 'scope:angular-theme',
+              onlyDependOnLibsWithTags: ['scope:angular-theme', 'scope:models'],
+            },
+            {
+              sourceTag: 'scope:check-me-web',
+              onlyDependOnLibsWithTags: ['scope:check-me-web', 'scope:angular-theme', 'scope:models'],
+            },
+            {
+              sourceTag: 'scope:check-me-api',
+              onlyDependOnLibsWithTags: ['scope:check-me-api', 'scope:models'],
             },
           ],
         },
