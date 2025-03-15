@@ -33,6 +33,9 @@
           "buildTarget": "check-me-api:build:production"
         }
       }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
     }
   }
 }
