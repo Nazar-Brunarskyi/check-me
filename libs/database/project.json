@@ -14,6 +14,10 @@
         "tsConfig": "libs/database/tsconfig.lib.json",
         "assets": ["libs/database/*.md"]
       }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
     }
   }
+
 }
