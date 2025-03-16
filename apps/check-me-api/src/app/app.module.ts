@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { dbConfiguration } from '../common/environment/configuration';
 import { AppController } from './app.controller';
-import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       load: [dbConfiguration],
     }),
     MongooseModule.forRoot(process.env.MONGO_DB_URI),
+    UsersModule,
   ],
   providers: [],
   controllers: [AppController],

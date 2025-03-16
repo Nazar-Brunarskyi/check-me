@@ -36,8 +36,12 @@ export default [
               onlyDependOnLibsWithTags: ['scope:check-me-web', 'scope:angular-theme', 'scope:models'],
             },
             {
+              sourceTag: 'scope:database',
+              onlyDependOnLibsWithTags: ['scope:database', 'scope:models'],
+            },
+            {
               sourceTag: 'scope:check-me-api',
-              onlyDependOnLibsWithTags: ['scope:check-me-api', 'scope:models'],
+              onlyDependOnLibsWithTags: ['scope:check-me-api', 'scope:models', 'scope:database'],
             },
           ],
         },
