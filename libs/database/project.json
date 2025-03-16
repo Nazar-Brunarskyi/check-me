@@ -19,5 +19,4 @@
       "executor": "@nx/eslint:lint"
     }
   }
-
 }
