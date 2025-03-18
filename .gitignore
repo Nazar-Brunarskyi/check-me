@@ -45,3 +45,4 @@ Thumbs.db
 
 # ENV files
 .env
+.env.telegram
