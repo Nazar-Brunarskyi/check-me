@@ -1,5 +1,5 @@
 import { ITelegramUpdate } from '@check-me/models';
-import { Body, Controller, Headers, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { TelegramRequestGuard } from '../guards/telegram-request-guard';
 import { TelegramService } from '../services/telegram.service';
 
