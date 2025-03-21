@@ -3,6 +3,8 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class TelegramService {
   async handleWebhook(data: ITelegramUpdate): Promise<void> {
+    console.log(data.message.text);
+
     return;
   }
 }
