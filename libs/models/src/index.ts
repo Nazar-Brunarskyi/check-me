@@ -1,3 +1,2 @@
 export * from './DTOs';
 export * from './interfaces';
-export * from './shared';

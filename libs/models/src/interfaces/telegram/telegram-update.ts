@@ -1,3 +1,5 @@
+import { ITelegramUser } from "./telegram-user";
+
 export interface ITelegramUpdate {
   update_id: number;
   message?: ITelegramMessage;
@@ -47,15 +49,6 @@ interface ITelegramMessage {
   migrate_to_chat_id?: number;
   migrate_from_chat_id?: number;
   pinned_message?: ITelegramMessage;
-}
-
-interface ITelegramUser {
-  id: number;
-  is_bot: boolean;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  language_code?: string;
 }
 
 interface ITelegramChat {

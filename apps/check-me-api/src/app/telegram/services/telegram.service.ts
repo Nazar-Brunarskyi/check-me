@@ -16,7 +16,7 @@ export class TelegramService implements OnModuleInit {
   }
 
   async handleWebhook(data: ITelegramUpdate): Promise<void> {
-    console.log(data);
+    console.log(this.commandMap);
 
     return;
   }
