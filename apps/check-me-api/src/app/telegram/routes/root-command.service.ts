@@ -1,9 +1,9 @@
 import { ITelegramUpdate } from '@check-me/models';
 import { getChatId } from '@check-me/utils/telegram/get-chat-id';
 import { Injectable } from '@nestjs/common';
-import { TelegramCommand } from '../../decorators/telegram-command.decorator';
-import { TelegramCommandGroup } from '../../decorators/telegram-group-command.decorator';
-import { TelegramCommunicationService } from '../telegram-communication.service';
+import { TelegramCommand } from '../decorators/telegram-command.decorator';
+import { TelegramCommandGroup } from '../decorators/telegram-group-command.decorator';
+import { TelegramCommunicationService } from '../services/telegram-communication.service';
 
 @Injectable()
 @TelegramCommandGroup()
@@ -17,4 +17,6 @@ export class RootCommandService {
       text: 'Hello, I am a Check-me bot. Welcome to the app!',
     });
   }
+
+  
 }
