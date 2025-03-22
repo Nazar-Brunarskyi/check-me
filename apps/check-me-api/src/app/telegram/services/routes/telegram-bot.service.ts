@@ -1,7 +1,7 @@
 import { ITelegramUpdate } from '@check-me/models';
 import { Injectable } from '@nestjs/common';
-import { TelegramCommand } from '../decorators/telegram-command.decorator';
-import { TelegramCommandGroup } from '../decorators/telegram-group-command.decorator';
+import { TelegramCommand } from '../../decorators/telegram-command.decorator';
+import { TelegramCommandGroup } from '../../decorators/telegram-group-command.decorator';
 
 @Injectable()
 @TelegramCommandGroup('/bot')
