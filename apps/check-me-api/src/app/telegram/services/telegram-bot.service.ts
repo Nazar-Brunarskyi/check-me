@@ -10,9 +10,4 @@ export class TelegramBotService {
   async startCommand(update: ITelegramUpdate) {
     console.log('Start command executed', update);
   }
-
-  async helpCommand(update: ITelegramUpdate) {
-    console.log('Help command executed', update);
-    // Логіка обробки
-  }
 }
