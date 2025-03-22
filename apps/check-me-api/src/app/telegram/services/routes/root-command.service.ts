@@ -1,9 +1,9 @@
 import { ITelegramUpdate } from '@check-me/models';
+import { getChatId } from '@check-me/utils/telegram/get-chat-id';
 import { Injectable } from '@nestjs/common';
 import { TelegramCommand } from '../../decorators/telegram-command.decorator';
 import { TelegramCommandGroup } from '../../decorators/telegram-group-command.decorator';
 import { TelegramCommunicationService } from '../telegram-communication.service';
-import {getChatId} from '@check-me/utils/telegram/get-chat-id';
 
 @Injectable()
 @TelegramCommandGroup()

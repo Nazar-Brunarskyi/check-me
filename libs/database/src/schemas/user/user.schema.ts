@@ -1,7 +1,7 @@
-import { ISchemaDefinition, IUser } from '@check-me/models';
+import { ISchemaDefinition, IUserSchema } from '@check-me/models';
 import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema<IUser>(
+const UserSchema = new mongoose.Schema<IUserSchema>(
   {
     name: {
       type: String,
@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema<IUser>(
   },
 );
 
-export const UserSchemaDefinition: ISchemaDefinition<IUser> = {
+export const UserSchemaDefinition: ISchemaDefinition<IUserSchema> = {
   name: 'users',
   schema: UserSchema,
 };
