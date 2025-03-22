@@ -1,4 +1,4 @@
-import { ITelegramUser } from "./telegram-user";
+import { ITelegramUser } from './telegram-user';
 
 export interface ITelegramUpdate {
   update_id: number;

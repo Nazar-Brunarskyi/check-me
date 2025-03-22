@@ -1,4 +1,4 @@
-import { ITelegramUser } from "./telegram-user";
+import { ITelegramUser } from './telegram-user';
 
 export interface ISendMessageParams {
   chat_id: number | string;
@@ -22,7 +22,6 @@ interface MessageEntity {
   user?: ITelegramUser;
   language?: string;
 }
-
 
 interface InlineKeyboardMarkup {
   inline_keyboard: InlineKeyboardButton[][];
