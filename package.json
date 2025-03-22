@@ -6,10 +6,12 @@
   "scripts": {
     "api:build": "nx run check-me-api:build",
     "api:serve": "nx run check-me-api:serve --configuration=development",
+    "kill:3000": "kill -9 $(lsof -t -i :3000)",
     "prepare": "husky",
     "project:build": "nx run-many -t build",
     "project:format": "prettier --write .",
     "project:lint": "npx nx run-many -t lint",
+    "script:telegram-webhook-setup": "esbuild tools/scripts/set-up-telegram-webhook.ts --outfile=dist/scripts/set-up-telegram-webhook.mjs && node dist/scripts/set-up-telegram-webhook.mjs && rm dist/scripts/set-up-telegram-webhook.mjs",
     "web:build": "nx run check-me-web:build --configuration=development",
     "web:serve": "nx run check-me-web:serve --configuration=development"
   },
@@ -30,6 +32,7 @@
     "axios": "^1.6.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "dotenv": "^16.4.7",
     "eslint-plugin-unused-imports": "^4.1.4",
     "mongoose": "^8.12.1",
     "prettier-plugin-organize-imports": "^4.1.0",
@@ -51,6 +54,7 @@
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
     "@nx/angular": "20.5.0",
+    "@nx/esbuild": "^20.5.0",
     "@nx/eslint": "20.5.0",
     "@nx/eslint-plugin": "20.5.0",
     "@nx/jest": "20.5.0",

@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { dbConfiguration } from '../common/environment/configuration';
 import { AppController } from './app.controller';
+import { TelegramModule } from './telegram/telegram.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -13,6 +14,7 @@ import { UsersModule } from './users/users.module';
     }),
     MongooseModule.forRoot(process.env.MONGO_DB_URI),
     UsersModule,
+    TelegramModule,
   ],
   providers: [],
   controllers: [AppController],

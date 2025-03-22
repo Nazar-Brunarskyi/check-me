@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { GetUserResponseDto } from '../DTOs/get-user-response.dto';
+import { GetUserResponseDto } from './DTOs/get-user-response.dto';
 
 @Injectable()
 export class UsersService {
