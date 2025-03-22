@@ -6,6 +6,7 @@
   "scripts": {
     "api:build": "nx run check-me-api:build",
     "api:serve": "nx run check-me-api:serve --configuration=development",
+    "kill:3000": "kill -9 $(lsof -t -i :3000)",
     "prepare": "husky",
     "project:build": "nx run-many -t build",
     "project:format": "prettier --write .",
