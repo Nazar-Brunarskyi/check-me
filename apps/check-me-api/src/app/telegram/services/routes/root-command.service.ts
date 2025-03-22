@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { TelegramCommand } from '../../decorators/telegram-command.decorator';
 import { TelegramCommandGroup } from '../../decorators/telegram-group-command.decorator';
 import { TelegramCommunicationService } from '../telegram-communication.service';
+import {getChatId} from '@check-me/utils/telegram/get-chat-id';
 
 @Injectable()
 @TelegramCommandGroup()
@@ -11,10 +12,8 @@ export class RootCommandService {
 
   @TelegramCommand('/start')
   async start(data: ITelegramUpdate): Promise<void> {
-    const chatId = data.message?.chat?.id ?? data.callback_query?.message?.chat.id;
-
     return this.telegramCommunicationService.sendMessage({
-      chat_id: chatId,
+      chat_id: getChatId(data),
       text: 'Hello, I am a Check-me bot. Welcome to the app!',
     });
   }

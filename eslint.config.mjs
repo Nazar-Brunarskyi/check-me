@@ -28,12 +28,16 @@ export default [
               onlyDependOnLibsWithTags: ['scope:models'],
             },
             {
+              sourceTag: 'scope:utils',
+              onlyDependOnLibsWithTags: ['scope:utils', 'scope:models'],
+            },
+            {
               sourceTag: 'scope:angular-theme',
               onlyDependOnLibsWithTags: ['scope:angular-theme', 'scope:models'],
             },
             {
               sourceTag: 'scope:check-me-web',
-              onlyDependOnLibsWithTags: ['scope:check-me-web', 'scope:angular-theme', 'scope:models'],
+              onlyDependOnLibsWithTags: ['scope:check-me-web', 'scope:angular-theme', 'scope:utils', 'scope:models'],
             },
             {
               sourceTag: 'scope:database',
@@ -41,7 +45,7 @@ export default [
             },
             {
               sourceTag: 'scope:check-me-api',
-              onlyDependOnLibsWithTags: ['scope:check-me-api', 'scope:models', 'scope:database'],
+              onlyDependOnLibsWithTags: ['scope:check-me-api', 'scope:database', 'scope:utils', 'scope:models'],
             },
           ],
         },
