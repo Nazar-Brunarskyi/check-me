@@ -211,7 +211,7 @@ interface ITelegramLocation {
   proximity_alert_radius?: number;
 }
 
-interface ITelegramContact {
+export interface ITelegramContact {
   phone_number: string;
   first_name: string;
   last_name?: string;

@@ -27,6 +27,10 @@ const TelegramUserSchema = new mongoose.Schema<ITelegramUserSchema>(
       type: String,
       required: false,
     },
+    phone_number: {
+      type: String,
+      required: false,
+    },
   },
   {
     collection: 'telegram-users',

@@ -6,4 +6,5 @@ export interface ITelegramUserSchema {
   last_name?: string;
   username?: string;
   language_code?: string;
+  phone_number?: string;
 }

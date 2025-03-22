@@ -24,7 +24,7 @@ export class TelegramService implements OnModuleInit {
       if (handler) {
         await handler(data);
       } else {
-        const defaultHandler = this.commandMap.get('/start');
+        const defaultHandler = this.commandMap.get('_');
         await defaultHandler(data);
       }
     } catch (error) {
