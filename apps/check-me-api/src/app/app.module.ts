@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { TelegramModule } from './telegram/telegram.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { TelegramModule } from './telegram/telegram.module';
       isGlobal: true,
     }),
     TelegramModule,
+    AuthModule,
   ],
   providers: [],
   controllers: [AppController],

@@ -78,17 +78,6 @@ export class RootCommandService {
     return user.toObject();
   }
 
-  #generateMesaageText(telegramUser: ITelegramUserSchema) {
-    const hasPhoneNumber = !!telegramUser.phone_number;
-
-    const textToSend = hasPhoneNumber
-      ? `Looks like you are already authenticated with this phone number: <b>${telegramUser.phone_number}</b>. Do you want to update it?`
-      : "Hello there! I'm the Check-me Bot, and I'm excited to welcome you to our app. To get started, please share your phone number with me. This helps us verify your account and ensure a smooth experience.";
-
-    const buttonText = hasPhoneNumber ? 'Update my phone number' : 'Share my phone number';
-    return { textToSend, buttonText };
-  }
-
   async #handleContact(data: ITelegramUpdate) {
     if (!data || !data.message || !data.message.contact) {
       this.logger.error('Failed to get contact from message');
@@ -127,5 +116,16 @@ export class RootCommandService {
         },
       });
     }
+  }
+
+  #generateMesaageText(telegramUser: ITelegramUserSchema) {
+    const hasPhoneNumber = !!telegramUser.phone_number;
+
+    const textToSend = hasPhoneNumber
+      ? `Looks like you are already authenticated with this phone number: <b>${telegramUser.phone_number}</b>. Do you want to update it?`
+      : "Hello there! I'm the Check-me Bot, and I'm excited to welcome you to our app. To get started, please share your phone number with me. This helps us verify your account and ensure a smooth experience.";
+
+    const buttonText = hasPhoneNumber ? 'Update my phone number' : 'Share my phone number';
+    return { textToSend, buttonText };
   }
 }
