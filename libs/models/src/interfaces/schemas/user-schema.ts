@@ -6,4 +6,6 @@ export interface IUserSchema {
   lastName?: string;
   phoneNumber?: string;
   telegramInfo: ITelegramInfo | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
