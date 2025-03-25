@@ -9,4 +9,9 @@ export class AuthController {
   sendCodeToTelegram(@Body() sendCodeToTelegramDto: SendCodeToTelegramDto) {
     return this.authService.sendCodeToTelegram(sendCodeToTelegramDto);
   }
+
+  @Post('login')
+  login() {
+    return this.authService.login();
+  }
 }
