@@ -1,2 +1,1 @@
-export * from './access-token-payload';
-export * from './refresh-token-payload';
+export * from './jwt-token-payload';

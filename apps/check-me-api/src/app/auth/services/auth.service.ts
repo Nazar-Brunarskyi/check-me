@@ -1,9 +1,8 @@
 import { AuthCodeSchemaDefinition, UserSchemaDefinition } from '@check-me/database';
 import {
-  IAccessTokenPayload,
   IAuthCodeSchema,
+  IJwtTokenPayload,
   ILoginResponseDTO,
-  IRefreshTokenPayload,
   ISendCodeToTelegramResponseDTO,
   IUserSchema,
 } from '@check-me/models';
@@ -113,29 +112,23 @@ export class AuthService {
   }
 
   #generateAccessToken(user: IUserSchema): string {
-    const accessTokenPayload: IAccessTokenPayload = {
-      sub: user._id,
-      firstName: user.firstName,
-    };
-
-    const accessToken = this.jwtService.sign(accessTokenPayload, {
+    return this.jwtService.sign(this.#generatePayload(user), {
       expiresIn: '15m',
       secret: process.env.JWT_ACCESS_TOKEN_SECRET,
     });
-
-    return accessToken;
   }
 
   #generateRefreshToken(user: IUserSchema): string {
-    const refreshTokenPayload: IRefreshTokenPayload = {
-      sub: user._id,
-    };
-
-    const refreshToken = this.jwtService.sign(refreshTokenPayload, {
+    return this.jwtService.sign(this.#generatePayload(user), {
       expiresIn: '7d',
       secret: process.env.JWT_REFRESH_TOKEN_SECRET,
     });
+  }
 
-    return refreshToken;
+  #generatePayload(user: IUserSchema): IJwtTokenPayload {
+    return {
+      sub: user._id,
+      firstName: user.firstName,
+    };
   }
 }

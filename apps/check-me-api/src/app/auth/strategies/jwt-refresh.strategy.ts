@@ -1,4 +1,4 @@
-import { IRefreshTokenPayload, JWT_STRATEGY_NAMES_ENUM } from '@check-me/models';
+import { IJwtTokenPayload, JWT_STRATEGY_NAMES_ENUM } from '@check-me/models';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
@@ -13,7 +13,7 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, JWT_STRATEGY_
     });
   }
 
-  async validate(payload: IRefreshTokenPayload) {
+  async validate(payload: IJwtTokenPayload) {
     return payload;
   }
 }
