@@ -40,6 +40,8 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
   },
 );
 
+UserSchema.index({ 'telegramInfo.telegramUserId': 1 });
+
 export const UserSchemaDefinition: ISchemaDefinition<IUserSchema> = {
   name: userSchemaName,
   schema: UserSchema,
