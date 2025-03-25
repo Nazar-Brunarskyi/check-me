@@ -3,6 +3,7 @@ import {
   IAuthCodeSchema,
   IJwtTokenPayload,
   ILoginResponseDTO,
+  IRefreshResponseDTO,
   ISendCodeToTelegramResponseDTO,
   IUserSchema,
 } from '@check-me/models';
@@ -16,6 +17,7 @@ import { Model, Types } from 'mongoose';
 import { TelegramCommunicationService } from '../../telegram/services/telegram-communication.service';
 import { LoginResponseDTO } from '../dto/login-response.dto';
 import { LoginDto } from '../dto/login.dto';
+import { RefreshResponseDTO } from '../dto/refresh-response.dto';
 import { SendCodeToTelegramResponseDTO } from '../dto/send-code-to-telegram-response.dto';
 import { SendCodeToTelegramDto } from '../dto/send-code-to-telegram.dto';
 
@@ -99,8 +101,17 @@ export class AuthService {
     return new LoginResponseDTO({ accessToken, refreshToken });
   }
 
-  async refresh() {
-    return;
+  async refresh(userId: string): Promise<IRefreshResponseDTO> {
+    const user = await this.userModel.findById(userId);
+
+    if (!user) {
+      this.logger.error(`User with id ${userId} not found`);
+      throw new UnauthorizedException('Unauthorized');
+    }
+
+    const accessToken = this.#generateAccessToken(user);
+
+    return new RefreshResponseDTO({ accessToken });
   }
 
   #generateAccessToken(user: IUserSchema): string {
