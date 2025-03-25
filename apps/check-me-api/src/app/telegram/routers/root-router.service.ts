@@ -52,6 +52,7 @@ export class RootCommandService {
 
   async #getOrCreateUser(data: ITelegramUpdate) {
     const telegramUser = getTelegramUser(data);
+    const chatId = getChatId(data);
 
     if (!telegramUser) {
       this.logger.error('Failed to get telegram user');
@@ -63,6 +64,7 @@ export class RootCommandService {
       is_bot: telegramUser.is_bot,
       username: telegramUser.username,
       language_code: telegramUser.language_code,
+      chat_id: chatId,
     };
 
     const user = await this.userModel
@@ -106,7 +108,6 @@ export class RootCommandService {
           { new: true },
         )
         .exec();
-      console.log({ updatedUser });
 
       await this.telegramCommunicationService.sendMessage({
         chat_id: getChatId(data),

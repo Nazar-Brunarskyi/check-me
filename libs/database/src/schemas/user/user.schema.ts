@@ -1,4 +1,4 @@
-import { ISchemaDefinition, IUserSchema } from '@check-me/models';
+import { ISchemaDefinition, ITelegramInfo, IUserSchema } from '@check-me/models';
 import mongoose from 'mongoose';
 
 const userSchemaName = 'users';
@@ -22,14 +22,13 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
 
     telegramInfo: {
       default: null,
-      type: new mongoose.Schema(
+      type: new mongoose.Schema<ITelegramInfo>(
         {
           telegramUserId: { type: Number, required: true },
           is_bot: { type: Boolean, required: true },
-          first_name: { type: String, required: true },
-          last_name: { type: String, required: false },
           username: { type: String, required: false },
           language_code: { type: String, required: false },
+          chat_id: { type: Number, required: true },
         },
         { _id: false },
       ),
