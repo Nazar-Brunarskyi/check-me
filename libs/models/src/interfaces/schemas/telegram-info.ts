@@ -4,5 +4,4 @@ export interface ITelegramInfo {
   is_bot: boolean;
   username?: string;
   language_code?: string;
-  phone_number?: string;
 }

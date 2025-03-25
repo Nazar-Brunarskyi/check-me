@@ -9,10 +9,17 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
       type: String,
       required: true,
     },
+
     lastName: {
       type: String,
       required: false,
     },
+
+    phoneNumber: {
+      type: String,
+      required: false,
+    },
+
     telegramInfo: {
       default: null,
       type: new mongoose.Schema(
@@ -23,7 +30,6 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
           last_name: { type: String, required: false },
           username: { type: String, required: false },
           language_code: { type: String, required: false },
-          phone_number: { type: String, required: false },
         },
         { _id: false },
       ),
