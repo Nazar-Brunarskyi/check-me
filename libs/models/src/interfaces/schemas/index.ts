@@ -1,1 +1,2 @@
- export * from './user-schema';
+export * from './telegram-info';
+export * from './user-schema';

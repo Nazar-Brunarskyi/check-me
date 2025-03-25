@@ -21,7 +21,6 @@ export class RootCommandService {
   async start(data: ITelegramUpdate): Promise<void> {
     // const telegramUser = await this.#getOrCreateTelegramUser(data);
     // const messageTexts = this.#generateMesaageText(telegramUser);
-
     // return this.telegramCommunicationService.sendMessage({
     //   chat_id: getChatId(data),
     //   text: messageTexts.textToSend,
@@ -55,25 +54,25 @@ export class RootCommandService {
   //     return;
   //   }
 
-    // const user = await this.telegramUserModel
-    //   .findOneAndUpdate(
-    //     { userId: telegramUser.id },
-    //     {
-    //       $setOnInsert: {
-    //         userId: telegramUser.id,
-    //         is_bot: telegramUser.is_bot,
-    //         first_name: telegramUser.first_name,
-    //         last_name: telegramUser.last_name,
-    //         username: telegramUser.username,
-    //         language_code: telegramUser.language_code,
-    //       },
-    //     },
-    //     { new: true, upsert: true },
-    //   )
-    //   .exec();
+  // const user = await this.telegramUserModel
+  //   .findOneAndUpdate(
+  //     { userId: telegramUser.id },
+  //     {
+  //       $setOnInsert: {
+  //         userId: telegramUser.id,
+  //         is_bot: telegramUser.is_bot,
+  //         first_name: telegramUser.first_name,
+  //         last_name: telegramUser.last_name,
+  //         username: telegramUser.username,
+  //         language_code: telegramUser.language_code,
+  //       },
+  //     },
+  //     { new: true, upsert: true },
+  //   )
+  //   .exec();
 
-    // return {};
-    // return user.toObject();
+  // return {};
+  // return user.toObject();
   // }
 
   async #handleContact(data: ITelegramUpdate) {
@@ -96,7 +95,6 @@ export class RootCommandService {
       // const updatedUser = await this.telegramUserModel
       //   .findOneAndUpdate({ userId: telegramUser.id }, { $set: { phone_number: contact.phone_number } }, { new: true })
       //   .exec();
-
       // await this.telegramCommunicationService.sendMessage({
       //   chat_id: getChatId(data),
       //   text: `Your phone number has been set to: <b>${updatedUser.phone_number}</b>`,
@@ -117,13 +115,13 @@ export class RootCommandService {
   }
 
   // #generateMesaageText() {
-    // const hasPhoneNumber = !!telegramUser.phone_number;
+  // const hasPhoneNumber = !!telegramUser.phone_number;
 
-    // const textToSend = hasPhoneNumber
-    //   ? `Looks like you are already authenticated with this phone number: <b>${telegramUser.phone_number}</b>. Do you want to update it?`
-    //   : "Hello there! I'm the Check-me Bot, and I'm excited to welcome you to our app. To get started, please share your phone number with me. This helps us verify your account and ensure a smooth experience.";
+  // const textToSend = hasPhoneNumber
+  //   ? `Looks like you are already authenticated with this phone number: <b>${telegramUser.phone_number}</b>. Do you want to update it?`
+  //   : "Hello there! I'm the Check-me Bot, and I'm excited to welcome you to our app. To get started, please share your phone number with me. This helps us verify your account and ensure a smooth experience.";
 
-    // const buttonText = hasPhoneNumber ? 'Update my phone number' : 'Share my phone number';
-    // return { textToSend, buttonText };
+  // const buttonText = hasPhoneNumber ? 'Update my phone number' : 'Share my phone number';
+  // return { textToSend, buttonText };
   // }
 }
