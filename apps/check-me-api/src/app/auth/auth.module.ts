@@ -6,8 +6,8 @@ import { PassportModule } from '@nestjs/passport';
 import { TelegramCommunicationService } from '../telegram/services/telegram-communication.service';
 import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
-import { JwtRefreshGuard } from './strategies/jwt-refresh.strategy';
-import { JwtAuthGuard } from './strategies/jwt.strategy';
+import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
+import { JwtAccessStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import { JwtAuthGuard } from './strategies/jwt.strategy';
       { name: UserSchemaDefinition.name, schema: UserSchemaDefinition.schema },
     ]),
   ],
-  providers: [AuthService, JwtAuthGuard, JwtRefreshGuard, TelegramCommunicationService],
+  providers: [AuthService, JwtAccessStrategy, JwtRefreshStrategy, TelegramCommunicationService],
   controllers: [AuthController],
 })
 export class AuthModule {}
