@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { TelegramModule } from './telegram/telegram.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { TelegramModule } from './telegram/telegram.module';
     }),
     TelegramModule,
     AuthModule,
+    UsersModule,
   ],
   providers: [],
   controllers: [AppController],
