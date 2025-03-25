@@ -4,7 +4,7 @@ import {
   IAuthCodeSchema,
   ILoginResponseDTO,
   IRefreshTokenPayload,
-  ISuccessfulResponseDto,
+  ISendCodeToTelegramResponseDTO,
   IUserSchema,
 } from '@check-me/models';
 import { generateSixDigitCode } from '@check-me/utils/auth/generate-six-digit-code';
@@ -14,10 +14,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { DateTime } from 'luxon';
 import { Model, Types } from 'mongoose';
-import { SuccessfulResponseDto } from '../../../common/DTOs/successful-response.dto';
 import { TelegramCommunicationService } from '../../telegram/services/telegram-communication.service';
 import { LoginResponseDTO } from '../dto/login-response.dto';
 import { LoginDto } from '../dto/login.dto';
+import { SendCodeToTelegramResponseDTO } from '../dto/send-code-to-telegram-response.dto';
 import { SendCodeToTelegramDto } from '../dto/send-code-to-telegram.dto';
 
 @Injectable()
@@ -25,15 +25,15 @@ export class AuthService {
   private readonly logger = new Logger(AuthService.name);
 
   constructor(
-    private jwtService: JwtService,
     @InjectModel(AuthCodeSchemaDefinition.name)
     private authCodeModel: Model<IAuthCodeSchema>,
     @InjectModel(UserSchemaDefinition.name)
     private userModel: Model<IUserSchema>,
+    private jwtService: JwtService,
     private readonly telegramCommunicationService: TelegramCommunicationService,
   ) {}
 
-  async sendCodeToTelegram(sendCodeToTelegramDto: SendCodeToTelegramDto): Promise<ISuccessfulResponseDto> {
+  async sendCodeToTelegram(sendCodeToTelegramDto: SendCodeToTelegramDto): Promise<ISendCodeToTelegramResponseDTO> {
     const { phoneNumber } = sendCodeToTelegramDto;
     const normalizedPhoneNumber = phoneNumber.split('+')[1];
     const code = generateSixDigitCode();
@@ -63,7 +63,7 @@ export class AuthService {
       text: `Your code is: <b>${code}</b>`,
     });
 
-    return new SuccessfulResponseDto({ success: true });
+    return new SendCodeToTelegramResponseDTO({ authCodeId: newAuthCode._id });
   }
 
   async login(loginDto: LoginDto): Promise<ILoginResponseDTO> {

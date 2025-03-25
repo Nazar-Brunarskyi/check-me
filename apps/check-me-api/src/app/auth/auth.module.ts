@@ -6,8 +6,8 @@ import { PassportModule } from '@nestjs/passport';
 import { TelegramCommunicationService } from '../telegram/services/telegram-communication.service';
 import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
-import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
 import { JwtAccessStrategy } from './strategies/jwt-access.strategy';
+import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
 
 @Module({
   imports: [

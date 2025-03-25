@@ -1,15 +1,23 @@
-import { ILoginResponseDTO, ISuccessfulResponseDto } from '@check-me/models';
-import { Body, Controller, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
+import { ILoginResponseDTO, ISendCodeToTelegramResponseDTO } from '@check-me/models';
+import { Body, Controller, Get, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
 import { LoginDto } from '../dto/login.dto';
 import { SendCodeToTelegramDto } from '../dto/send-code-to-telegram.dto';
+import { JwtAccessGuard } from '../guards/jwt-access-guard';
 import { JwtRefreshGuard } from '../guards/jwt-refresh-guard';
 import { AuthService } from '../services/auth.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @Get('test')
+  @UseGuards(JwtAccessGuard)
+  test(): string {
+    return 'Hello, World!';
+  }
+
   @Post('send-code-to-telegram')
-  sendCodeToTelegram(@Body() sendCodeToTelegramDto: SendCodeToTelegramDto): Promise<ISuccessfulResponseDto> {
+  sendCodeToTelegram(@Body() sendCodeToTelegramDto: SendCodeToTelegramDto): Promise<ISendCodeToTelegramResponseDTO> {
     return this.authService.sendCodeToTelegram(sendCodeToTelegramDto);
   }
 

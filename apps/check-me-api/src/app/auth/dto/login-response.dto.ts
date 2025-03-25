@@ -8,6 +8,7 @@ export class LoginResponseDTO implements ILoginResponseDTO {
 
   @Expose()
   refreshToken: string;
+
   constructor(partial: Partial<LoginResponseDTO>) {
     Object.assign(this, partial);
   }
