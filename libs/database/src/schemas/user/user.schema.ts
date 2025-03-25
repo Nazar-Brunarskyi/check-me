@@ -1,24 +1,26 @@
 import { ISchemaDefinition, IUserSchema } from '@check-me/models';
 import mongoose from 'mongoose';
 
+const userSchemaName = 'users';
+
 const UserSchema = new mongoose.Schema<IUserSchema>(
   {
-    name: {
+    firstName: {
       type: String,
       required: true,
     },
-    password: {
+    lastName: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {
-    collection: 'users',
+    collection: userSchemaName,
     timestamps: true,
   },
 );
 
 export const UserSchemaDefinition: ISchemaDefinition<IUserSchema> = {
-  name: 'users',
+  name: userSchemaName,
   schema: UserSchema,
 };

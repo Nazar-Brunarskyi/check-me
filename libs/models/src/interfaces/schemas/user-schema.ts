@@ -1,4 +1,5 @@
 export interface IUserSchema {
-  name: string;
-  password: string;
+  _id: string;
+  firstName: string;
+  lastName?: string;
 }

@@ -10,6 +10,8 @@ export class TelegramController {
   @UseGuards(TelegramRequestGuard)
   @Post('webhook')
   handleWebhook(@Body() data: ITelegramUpdate) {
+    console.log(data);
+
     return this.telegramService.handleWebhook(data);
   }
 }
