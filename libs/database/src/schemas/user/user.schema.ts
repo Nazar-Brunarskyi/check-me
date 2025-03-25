@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
       default: null,
       type: new mongoose.Schema<ITelegramInfo>(
         {
-          telegramUserId: { type: Number, required: true },
+          telegramUserId: { type: Number, required: true, unique: true },
           is_bot: { type: Boolean, required: true },
           username: { type: String, required: false },
           language_code: { type: String, required: false },
@@ -39,8 +39,6 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
     timestamps: true,
   },
 );
-
-UserSchema.index({ 'telegramInfo.telegramUserId': 1 });
 
 export const UserSchemaDefinition: ISchemaDefinition<IUserSchema> = {
   name: userSchemaName,
