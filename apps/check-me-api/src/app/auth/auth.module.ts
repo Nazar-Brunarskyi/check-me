@@ -7,7 +7,7 @@ import { TelegramCommunicationService } from '../telegram/services/telegram-comm
 import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
 import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
-import { JwtAccessStrategy } from './strategies/jwt.strategy';
+import { JwtAccessStrategy } from './strategies/jwt-access.strategy';
 
 @Module({
   imports: [

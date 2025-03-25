@@ -1,8 +1,8 @@
 import { ILoginResponseDTO, ISuccessfulResponseDto } from '@check-me/models';
 import { Body, Controller, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { LoginDto } from '../dto/login.dto';
 import { SendCodeToTelegramDto } from '../dto/send-code-to-telegram.dto';
+import { JwtRefreshGuard } from '../guards/jwt-refresh-guard';
 import { AuthService } from '../services/auth.service';
 
 @Controller('auth')
@@ -21,7 +21,7 @@ export class AuthController {
 
   @Post('refresh')
   @HttpCode(200)
-  @UseGuards(AuthGuard('jwt-refresh'))
+  @UseGuards(JwtRefreshGuard)
   refresh(@Request() req): number {
     return 123;
   }
