@@ -99,14 +99,6 @@ export class AuthService {
     return new LoginResponseDTO({ accessToken, refreshToken });
   }
 
-  async validateUser() {
-    return;
-  }
-
-  async register() {
-    return;
-  }
-
   async refresh() {
     return;
   }

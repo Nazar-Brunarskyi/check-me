@@ -1,5 +1,5 @@
-import { ILoginResponseDTO, ISendCodeToTelegramResponseDTO } from '@check-me/models';
-import { Body, Controller, Get, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
+import { IJwtTokenPayload, ILoginResponseDTO, ISendCodeToTelegramResponseDTO } from '@check-me/models';
+import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { GetUserFromRequest } from '../../../common/decorators/get-user-from-request.decorator';
 import { LoginDto } from '../dto/login.dto';
 import { SendCodeToTelegramDto } from '../dto/send-code-to-telegram.dto';
@@ -13,7 +13,7 @@ export class AuthController {
 
   @Get('test')
   @UseGuards(JwtAccessGuard)
-  test(@GetUserFromRequest() user): string {
+  test(@GetUserFromRequest() user: IJwtTokenPayload) {
     return user;
   }
 
@@ -31,7 +31,7 @@ export class AuthController {
   @Post('refresh')
   @HttpCode(200)
   @UseGuards(JwtRefreshGuard)
-  refresh(@Request() @GetUserFromRequest() user): number {
+  refresh(@GetUserFromRequest() user: IJwtTokenPayload) {
     return user;
   }
 }
