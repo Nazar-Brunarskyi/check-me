@@ -1,10 +1,10 @@
-import { IRefreshTokenPayload } from '@check-me/models';
+import { IRefreshTokenPayload, JWT_STRATEGY_NAMES_ENUM } from '@check-me/models';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 @Injectable()
-export class JwtRefreshGuard extends PassportStrategy(Strategy, 'jwt-refresh') {
+export class JwtRefreshGuard extends PassportStrategy(Strategy, JWT_STRATEGY_NAMES_ENUM.JWT_REFRESH) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
