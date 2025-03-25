@@ -24,8 +24,6 @@ export class AuthController {
   @HttpCode(200)
   @UseGuards(AuthGuard('jwt-refresh'))
   refresh(@Request() req): number {
-    console.log(req.user);
-
     return 123
   }
 }

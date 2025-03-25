@@ -74,7 +74,6 @@ export class AuthService {
     }
 
     const authCode = await this.authCodeModel.findById(authCodeId).populate('user').exec();
-    console.log({ authCode });
 
     if (!authCode) {
       throw new UnauthorizedException('Invalid authentication code.');
