@@ -1,4 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { ILoginResponseDTO, ISuccessfulResponseDto } from '@check-me/models';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { LoginDto } from '../dto/login.dto';
 import { SendCodeToTelegramDto } from '../dto/send-code-to-telegram.dto';
 import { AuthService } from '../services/auth.service';
 
@@ -6,12 +8,13 @@ import { AuthService } from '../services/auth.service';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Post('send-code-to-telegram')
-  sendCodeToTelegram(@Body() sendCodeToTelegramDto: SendCodeToTelegramDto) {
+  sendCodeToTelegram(@Body() sendCodeToTelegramDto: SendCodeToTelegramDto): Promise<ISuccessfulResponseDto> {
     return this.authService.sendCodeToTelegram(sendCodeToTelegramDto);
   }
 
   @Post('login')
-  login() {
-    return this.authService.login();
+  @HttpCode(200)
+  login(@Body() loginDto: LoginDto): Promise<ILoginResponseDTO> {
+    return this.authService.login(loginDto);
   }
 }
