@@ -120,8 +120,14 @@ export class AuthService {
       sub: user._id,
     };
 
-    const accessToken = this.jwtService.sign(accessTokenPayload, { expiresIn: '15m' });
-    const refreshToken = this.jwtService.sign(refreshTokenPayload, { expiresIn: '7d' });
+    const accessToken = this.jwtService.sign(accessTokenPayload, {
+      expiresIn: '15m',
+      secret: process.env.JWT_ACCESS_TOKEN_SECRET,
+    });
+    const refreshToken = this.jwtService.sign(refreshTokenPayload, {
+      expiresIn: '7d',
+      secret: process.env.JWT_REFRESH_TOKEN_SECRET,
+    });
 
     return { accessToken, refreshToken };
   }
