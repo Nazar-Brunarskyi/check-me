@@ -1,11 +1,13 @@
 import { IJwtTokenPayload, JWT_STRATEGY_NAMES_ENUM } from '@check-me/models';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Types } from 'mongoose';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(Strategy, JWT_STRATEGY_NAMES_ENUM.JWT_REFRESH) {
+  private readonly logger = new Logger(JwtRefreshStrategy.name);
+
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -18,6 +20,7 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, JWT_STRATEGY_
     const { sub } = payload;
 
     if (!Types.ObjectId.isValid(sub)) {
+      this.logger.error('Invalid user id in JwtRefreshStrategy');
       throw new UnauthorizedException('Unauthorized');
     }
     return payload;
