@@ -92,7 +92,10 @@ export class AuthService {
       throw new UnauthorizedException('Invalid authentication code.');
     }
 
-    const { accessToken, refreshToken } = this.#generateTokens(authCode.user);
+    await this.authCodeModel.findByIdAndDelete(authCodeId);
+
+    const accessToken = this.#generateAccessToken(authCode.user);
+    const refreshToken = this.#generateRefreshToken(authCode.user);
 
     return new LoginResponseDTO({ accessToken, refreshToken });
   }
@@ -109,25 +112,30 @@ export class AuthService {
     return;
   }
 
-  #generateTokens(user: IUserSchema) {
+  #generateAccessToken(user: IUserSchema): string {
     const accessTokenPayload: IAccessTokenPayload = {
       sub: user._id,
       firstName: user.firstName,
-    };
-
-    const refreshTokenPayload: IRefreshTokenPayload = {
-      sub: user._id,
     };
 
     const accessToken = this.jwtService.sign(accessTokenPayload, {
       expiresIn: '15m',
       secret: process.env.JWT_ACCESS_TOKEN_SECRET,
     });
+
+    return accessToken;
+  }
+
+  #generateRefreshToken(user: IUserSchema): string {
+    const refreshTokenPayload: IRefreshTokenPayload = {
+      sub: user._id,
+    };
+
     const refreshToken = this.jwtService.sign(refreshTokenPayload, {
       expiresIn: '7d',
       secret: process.env.JWT_REFRESH_TOKEN_SECRET,
     });
 
-    return { accessToken, refreshToken };
+    return refreshToken;
   }
 }
