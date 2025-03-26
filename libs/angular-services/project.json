@@ -1,0 +1,13 @@
+{
+  "name": "angular-services",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/angular-services/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:angular-services"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

@@ -36,8 +36,18 @@ export default [
               onlyDependOnLibsWithTags: ['scope:angular-theme', 'scope:models'],
             },
             {
+              sourceTag: 'scope:angular-services',
+              onlyDependOnLibsWithTags: ['scope:angular-services', 'scope:utils', 'scope:models'],
+            },
+            {
               sourceTag: 'scope:check-me-web',
-              onlyDependOnLibsWithTags: ['scope:check-me-web', 'scope:angular-theme', 'scope:utils', 'scope:models'],
+              onlyDependOnLibsWithTags: [
+                'scope:check-me-web',
+                'scope:angular-theme',
+                'scope:angular-services',
+                'scope:utils',
+                'scope:models',
+              ],
             },
             {
               sourceTag: 'scope:database',
