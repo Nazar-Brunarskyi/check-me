@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { HeaderComponent } from '../../components/header/header.component';
 import { ENVIRONMENT_CONFIG } from '../../injection-tokens/environment.token';
-import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
   imports: [RouterModule, ButtonModule, HeaderComponent],

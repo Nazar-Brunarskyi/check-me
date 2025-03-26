@@ -10,7 +10,10 @@ export class TelegramService implements OnModuleInit {
 
   private commandMap = new Map<string, (data: ITelegramUpdate) => Promise<void>>();
 
-  constructor(private readonly discoveryService: DiscoveryService, private readonly reflector: Reflector) {}
+  constructor(
+    private readonly discoveryService: DiscoveryService,
+    private readonly reflector: Reflector,
+  ) {}
 
   onModuleInit() {
     this.#confirmCommands();
