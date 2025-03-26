@@ -1,16 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { HeaderComponent } from '../../components/header/header.component';
-import { ENVIRONMENT_CONFIG } from '../../injection-tokens/environment.token';
 
 @Component({
-  imports: [RouterModule, ButtonModule, HeaderComponent],
+  imports: [RouterModule, ButtonModule],
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  template: ` <router-outlet></router-outlet> `,
 })
 export class AppComponent {
-  private readonly environmentConfig = inject(ENVIRONMENT_CONFIG);
   title = 'check-me-web';
 }

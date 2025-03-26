@@ -1,8 +1,13 @@
 import { Route } from '@angular/router';
 import { LoginPageComponent } from '../components/_routes/login-page/login-page.component';
+import { BaseLayoutComponent } from '../components/layouts/base-layout/base-layout.component';
 
 export const appRoutes: Route[] = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginPageComponent, pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' },
+  {
+    path: '',
+    pathMatch: 'full',
+    component: BaseLayoutComponent,
+    children: [{ path: '', component: LoginPageComponent, pathMatch: 'full' }],
+  },
+  { path: 'auth', component: LoginPageComponent },
 ];
