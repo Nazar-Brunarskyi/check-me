@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { ENVIRONMENT_CONFIG } from '../injection-tokens/environment.token';
+import { ENVIRONMENT_CONFIG } from '../../injection-tokens/environment.token';
 
 @Component({
   imports: [RouterModule, ButtonModule],
