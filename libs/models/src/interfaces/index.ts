@@ -1,3 +1,4 @@
+export * from './angular';
 export * from './database';
 export * from './JWT';
 export * from './schemas';

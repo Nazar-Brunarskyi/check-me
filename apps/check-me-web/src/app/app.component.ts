@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { ENVIRONMENT_CONFIG } from '../injection-tokens/environment.token';
 
 @Component({
   imports: [RouterModule, ButtonModule],
@@ -9,5 +10,7 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  private readonly environmentConfig = inject(ENVIRONMENT_CONFIG);
   title = 'check-me-web';
+  test = this.environmentConfig.test;
 }

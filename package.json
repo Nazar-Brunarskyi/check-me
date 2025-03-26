@@ -15,7 +15,8 @@
     "project:lint": "npx nx run-many -t lint",
     "script:telegram-webhook-setup": "esbuild tools/scripts/set-up-telegram-webhook.ts --outfile=dist/scripts/set-up-telegram-webhook.mjs && node dist/scripts/set-up-telegram-webhook.mjs && rm dist/scripts/set-up-telegram-webhook.mjs",
     "web:build": "nx run check-me-web:build --configuration=development",
-    "web:serve": "nx run check-me-web:serve --configuration=development"
+    "web:serve": "nx run check-me-web:serve --configuration=development",
+    "web:serve:prod": "nx run check-me-web:serve --configuration=production"
   },
   "dependencies": {
     "@angular/common": "~19.2.0",
