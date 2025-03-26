@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { TestService } from '../../services/test.service';
+import { TestService } from '../../../services/test.service';
 
 @Component({
   selector: 'app-login-page',
