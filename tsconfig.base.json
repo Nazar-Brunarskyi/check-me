@@ -15,7 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@check-me/angular-services": ["libs/angular-services/src/index.ts"],
       "@check-me/angular-theme": ["libs/angular-theme/src/index.ts"],
       "@check-me/database": ["libs/database/src/index.ts"],
       "@check-me/models": ["libs/models/src/index.ts"],

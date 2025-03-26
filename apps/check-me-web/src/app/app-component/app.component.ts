@@ -12,5 +12,4 @@ import { ENVIRONMENT_CONFIG } from '../../injection-tokens/environment.token';
 export class AppComponent {
   private readonly environmentConfig = inject(ENVIRONMENT_CONFIG);
   title = 'check-me-web';
-  test = this.environmentConfig.test;
 }

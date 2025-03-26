@@ -1,5 +1,5 @@
 import { IAngularEnvironment } from '@check-me/models';
 
 export const environment: IAngularEnvironment = {
-  test: 'development',
+  apiUrl: 'http://localhost:3000',
 };

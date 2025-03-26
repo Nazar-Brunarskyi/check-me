@@ -1,3 +1,3 @@
 export interface IAngularEnvironment {
-  test: string;
+  apiUrl: string;
 }
