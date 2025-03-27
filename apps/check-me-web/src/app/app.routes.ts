@@ -4,10 +4,15 @@ import { LoginPageComponent } from '../components/_routes/login-page/login-page.
 export const appRoutes: Route[] = [
   {
     path: '',
-    pathMatch: 'full',
     loadComponent: () =>
       import('../components/layouts/base-layout/base-layout.component').then((c) => c.BaseLayoutComponent),
-    children: [{ path: '', component: LoginPageComponent, pathMatch: 'full' }],
+    children: [
+      {
+        path: 'aaa',
+        loadComponent: () =>
+          import('../components/_routes/login-page/login-page.component').then((c) => c.LoginPageComponent),
+      },
+    ],
   },
   { path: 'auth', component: LoginPageComponent },
 ];
