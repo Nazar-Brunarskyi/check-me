@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TestService } from '../../../services/test.service';
 
 @Component({
@@ -8,12 +8,12 @@ import { TestService } from '../../../services/test.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   private readonly testService = inject(TestService);
 
-  ngOnInit() {
-    this.testService.getTest().subscribe((data) => {
-      console.log(data);
-    });
-  }
+  // ngOnInit() {
+  //   this.testService.getTest().subscribe((data) => {
+  //     console.log(data);
+  //   });
+  // }
 }
