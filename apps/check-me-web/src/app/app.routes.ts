@@ -1,9 +1,8 @@
 import { Route } from '@angular/router';
 
-import { AuthLayuotComponent } from '../components/_layouts/auth-layuot/auth-layuot.component';
 
 export const appRoutes: Route[] = [
-  { path: 'auth', component: AuthLayuotComponent },
+  { path: 'auth', loadComponent: () => import('../components/_layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent) },
   {
     path: '',
     loadComponent: () =>
