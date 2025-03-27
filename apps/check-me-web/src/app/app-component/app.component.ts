@@ -5,8 +5,7 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   imports: [RouterModule, ButtonModule],
   selector: 'app-root',
-  template: ` <router-outlet></router-outlet> `,
+  template: `<router-outlet></router-outlet>`,
 })
 export class AppComponent {
-  title = 'check-me-web';
 }
