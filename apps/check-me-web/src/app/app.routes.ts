@@ -1,12 +1,13 @@
 import { Route } from '@angular/router';
-import { LoginPageComponent } from '../components/_routes/login-page/login-page.component';
+
+import { AuthLayuotComponent } from '../components/_layouts/auth-layuot/auth-layuot.component';
 
 export const appRoutes: Route[] = [
-  { path: 'auth', component: LoginPageComponent },
+  { path: 'auth', component: AuthLayuotComponent },
   {
     path: '',
     loadComponent: () =>
-      import('../components/layouts/base-layout/base-layout.component').then((c) => c.BaseLayoutComponent),
+      import('../components/_layouts/base-layout/base-layout.component').then((c) => c.BaseLayoutComponent),
     children: [
       {
         path: '',
