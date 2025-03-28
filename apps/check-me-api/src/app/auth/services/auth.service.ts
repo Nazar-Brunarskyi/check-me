@@ -67,7 +67,7 @@ export class AuthService {
     return new SendCodeToTelegramResponseDTO({ authCodeId: newAuthCode._id });
   }
 
-  async login(loginDto: LoginDto): Promise<ILoginResponseDTO> {
+  async loginWithCode(loginDto: LoginDto): Promise<ILoginResponseDTO> {
     const { code, authCodeId } = loginDto;
 
     if (!Types.ObjectId.isValid(authCodeId)) {

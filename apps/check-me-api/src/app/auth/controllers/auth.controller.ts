@@ -27,10 +27,10 @@ export class AuthController {
     return this.authService.sendCodeToTelegram(sendCodeToTelegramDto);
   }
 
-  @Post('login')
+  @Post('login-with-code')
   @HttpCode(200)
-  login(@Body() loginDto: LoginDto): Promise<ILoginResponseDTO> {
-    return this.authService.login(loginDto);
+  loginWithCode(@Body() loginDto: LoginDto): Promise<ILoginResponseDTO> {
+    return this.authService.loginWithCode(loginDto);
   }
 
   @Post('refresh')
