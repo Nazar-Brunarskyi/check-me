@@ -1,0 +1,26 @@
+<div class="flex flex-col gap-y-2">
+  @if (label()) {
+  <label class="font-medium" [for]="name()"> {{ label() }} </label>
+  }
+
+  <div class="flex flex-col gap-y-2">
+    <p-inputotp
+      [id]="name()"
+      [(ngModel)]="value"
+      [class]="codeInputclass()"
+      (input)="onInput($event)"
+      (blur)="onTouched()"
+      [disabled]="disabled()"
+      [integerOnly]="true"
+      [ngClass]="{ error: invalid() }"
+      [size]="size()"
+      [length]="length()"
+    />
+
+    @if (invalid() || errorMesaage()) {
+    <span class="text-sm font-light text-red-500"> {{ errorMesaage() }} </span>
+    } @if (ghostText()) {
+    <span class="text-surface-500 text-sm font-light">{{ ghostText() }}</span>
+    }
+  </div>
+</div>

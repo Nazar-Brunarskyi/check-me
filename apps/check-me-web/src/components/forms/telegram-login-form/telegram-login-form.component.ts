@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { finalize } from 'rxjs';
 import { TelegramLoginService } from '../../../services/telegram-login.service';
+import { CodeInputComponent } from '../../code-input/code-input.component';
 import { InputComponent } from '../../input/input.component';
 
 @Component({
   selector: 'app-telegram-login-form',
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonModule, CodeInputComponent],
   templateUrl: './telegram-login-form.component.html',
 })
 export class TelegramLoginFormComponent {
@@ -22,6 +23,7 @@ export class TelegramLoginFormComponent {
 
   phoneNumberErrorMessage = signal<string | null>(null);
   isSendingCode = signal<boolean>(false);
+  isLoggingIn = signal<boolean>(false);
 
   telegramLoginForm = this.formBuilder.group({
     phoneNumber: [
@@ -33,6 +35,10 @@ export class TelegramLoginFormComponent {
         Validators.maxLength(15),
       ],
     ],
+  });
+
+  codeForm = this.formBuilder.group({
+    code: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
   });
 
   getphoneNumberErrorMessage(): string | null {
@@ -86,5 +92,9 @@ export class TelegramLoginFormComponent {
           console.log('error');
         },
       });
+  }
+
+  handleLogin(): void {
+    console.log('login');
   }
 }

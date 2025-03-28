@@ -1,6 +1,25 @@
 <div>
   @if (showEnterCodeState()) {
-  <span>code</span>
+  <form [formGroup]="codeForm" (ngSubmit)="handleLogin()">
+    <app-code-input
+      codeInputclass="flex justify-between"
+      formControlName="code"
+      name="code"
+      label="Code"
+      ghostText="Enter code our bot send you on telegram"
+      size="large"
+      [length]="6"
+    />
+
+    <p-button
+      [loading]="isLoggingIn()"
+      [disabled]="codeForm.invalid"
+      type="submit"
+      [style]="{ width: '100%', marginTop: '20px' }"
+    >
+      login</p-button
+    >
+  </form>
   } @else {
 
   <form class="flex flex-col gap-y-6" [formGroup]="telegramLoginForm" (ngSubmit)="handleSendCode()">

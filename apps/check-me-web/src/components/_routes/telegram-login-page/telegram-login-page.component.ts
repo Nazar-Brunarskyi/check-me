@@ -7,7 +7,6 @@ import { TelegramLoginFormComponent } from '../../forms/telegram-login-form/tele
   selector: 'app-telegram-login-page',
   imports: [CommonModule, CardModule, TelegramLoginFormComponent],
   templateUrl: './telegram-login-page.component.html',
-  styleUrls: ['./telegram-login-page.component.scss'],
 })
 export class TelegramLoginPageComponent {
   authCodeId = input<string>();
