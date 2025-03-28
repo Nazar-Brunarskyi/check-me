@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { TestService } from '../../../services/test.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-login-page',
@@ -8,12 +7,4 @@ import { TestService } from '../../../services/test.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
-export class LoginPageComponent {
-  private readonly testService = inject(TestService);
-
-  // ngOnInit() {
-  //   this.testService.getTest().subscribe((data) => {
-  //     console.log(data);
-  //   });
-  // }
-}
+export class LoginPageComponent {}

@@ -4,8 +4,4 @@ import { BaseHttpService } from './base-http.service';
 @Injectable({
   providedIn: 'root',
 })
-export class TestService extends BaseHttpService {
-  getTest() {
-    return this.get<any>('');
-  }
-}
+export class AuthService extends BaseHttpService {}

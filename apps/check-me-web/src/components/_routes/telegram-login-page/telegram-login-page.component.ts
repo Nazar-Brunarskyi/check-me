@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { TelegramLoginFormComponent } from '../../forms/telegram-login-form/telegram-login-form.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-telegram-login-page',
@@ -9,5 +10,7 @@ import { TelegramLoginFormComponent } from '../../forms/telegram-login-form/tele
   templateUrl: './telegram-login-page.component.html',
 })
 export class TelegramLoginPageComponent {
+  authService = inject(AuthService);
   authCodeId = input<string>();
+
 }
