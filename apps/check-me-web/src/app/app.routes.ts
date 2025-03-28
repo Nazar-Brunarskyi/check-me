@@ -1,8 +1,21 @@
 import { Route } from '@angular/router';
 
-
 export const appRoutes: Route[] = [
-  { path: 'auth', loadComponent: () => import('../components/_layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent) },
+  {
+    path: 'auth',
+    loadComponent: () =>
+      import('../components/_layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent),
+    children: [
+      {
+        path: '',
+        // path: 'telegram-login',
+        loadComponent: () =>
+          import('../components/_routes/telegram-login-page/telegram-login-page.component').then(
+            (c) => c.TelegramLoginPageComponent,
+          ),
+      },
+    ],
+  },
   {
     path: '',
     loadComponent: () =>

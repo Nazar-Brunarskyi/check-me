@@ -5,6 +5,7 @@ import { borderColors } from './colors/border';
 import { elementalColors } from './colors/elemental';
 import { primaryColors } from './colors/primary';
 
+import { formField } from './color-scheme/form-field';
 import { button } from './components/button/button';
 
 export const theme = definePreset(Aura, {
@@ -14,6 +15,11 @@ export const theme = definePreset(Aura, {
   },
   semantic: {
     primary: primaryColors.colors,
+    colorScheme: {
+      light: {
+        formField: formField,
+      },
+    },
   },
   components: {
     button,
