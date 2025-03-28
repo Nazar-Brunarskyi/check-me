@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { TelegramLoginFormComponent } from '../../forms/telegram-login-form/telegram-login-form.component';
 
@@ -9,4 +9,6 @@ import { TelegramLoginFormComponent } from '../../forms/telegram-login-form/tele
   templateUrl: './telegram-login-page.component.html',
   styleUrls: ['./telegram-login-page.component.scss'],
 })
-export class TelegramLoginPageComponent {}
+export class TelegramLoginPageComponent {
+  authCodeId = input<string>();
+}

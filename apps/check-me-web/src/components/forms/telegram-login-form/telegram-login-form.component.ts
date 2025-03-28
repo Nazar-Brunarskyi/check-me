@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { finalize } from 'rxjs';
+import { TelegramLoginService } from '../../../services/telegram-login.service';
 import { InputComponent } from '../../input/input.component';
 
 @Component({
@@ -10,9 +13,15 @@ import { InputComponent } from '../../input/input.component';
   templateUrl: './telegram-login-form.component.html',
 })
 export class TelegramLoginFormComponent {
+  private router = inject(Router);
   private formBuilder = inject(FormBuilder);
+  private telegramLoginService = inject(TelegramLoginService);
+
+  showEnterCodeState = input<boolean>(false);
+  authCodeId = input<string>();
 
   phoneNumberErrorMessage = signal<string | null>(null);
+  isSendingCode = signal<boolean>(false);
 
   telegramLoginForm = this.formBuilder.group({
     phoneNumber: [
@@ -51,11 +60,31 @@ export class TelegramLoginFormComponent {
     this.phoneNumberErrorMessage.set(this.getphoneNumberErrorMessage());
   }
 
-  sendCode(): void {
+  handleSendCode(): void {
     this.validateForm();
 
     if (!this.telegramLoginForm.valid) return;
 
-    console.log('sendCode');
+    this.isSendingCode.set(true);
+
+    this.telegramLoginService
+      .sendCodeToTelegram({ phoneNumber: ('+' + this.telegramLoginForm.get('phoneNumber')?.value) as string })
+      .pipe(
+        finalize(() => {
+          this.isSendingCode.set(false);
+        }),
+      )
+      .subscribe({
+        next: (data) => {
+          const authCodeId = data.authCodeId;
+          this.router.navigate([], {
+            queryParams: { authCodeId },
+            queryParamsHandling: 'replace',
+          });
+        },
+        error: () => {
+          console.log('error');
+        },
+      });
   }
 }

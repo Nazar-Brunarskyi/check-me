@@ -1,5 +1,9 @@
 <div>
-  <form class="flex flex-col gap-y-6" [formGroup]="telegramLoginForm" (ngSubmit)="sendCode()">
+  @if (showEnterCodeState()) {
+  <span>code</span>
+  } @else {
+
+  <form class="flex flex-col gap-y-6" [formGroup]="telegramLoginForm" (ngSubmit)="handleSendCode()">
     <app-input
       formControlName="phoneNumber"
       name="phoneNumber"
@@ -11,6 +15,7 @@
       [invalid]="!!phoneNumberErrorMessage()"
     />
 
-    <p-button type="submit" [style]="{ width: '100%' }">Send code</p-button>
+    <p-button [loading]="isSendingCode()" type="submit" [style]="{ width: '100%' }">Send code</p-button>
   </form>
+  }
 </div>
