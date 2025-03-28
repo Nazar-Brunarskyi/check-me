@@ -1,0 +1,12 @@
+input[type='number'] {
+  // Remove spinner for Chrome, Safari, Edge, Opera
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  // Remove spinner for Firefox + standard fallback
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

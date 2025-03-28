@@ -17,7 +17,10 @@ import { InputTextModule } from 'primeng/inputtext';
   ],
 })
 export class InputComponent implements ControlValueAccessor {
+  type = input<'text' | 'number' | 'password'>('text');
   name = input.required<string>();
+  placeholder = input<string>();
+  ghostText = input<string>();
   label = input<string>();
   invalid = input<boolean>(false);
   errorMesaage = input<string | null>();

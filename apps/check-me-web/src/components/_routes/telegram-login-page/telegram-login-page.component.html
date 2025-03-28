@@ -5,18 +5,7 @@
     <a class="link" href="https://t.me/check_me_test_836_bot" target="_blank">our telegram bot</a></ng-template
   >
 
-  <div>
-    <form [formGroup]="telegramLoginForm" (ngSubmit)="onSubmit()">
-      <app-input
-        formControlName="phoneNumber"
-        name="123"
-        label="Phone number"
-        [errorMesaage]="!!this.telegramLoginForm.get('phoneNumber')?.invalid ? phoneNumberErrorMessages() : null"
-        [invalid]="!!this.telegramLoginForm.get('phoneNumber')?.invalid"
-      />
-      <!-- <app-input formControlName="phoneNumber2" name="456" /> -->
-
-      <button type="submit" class="mt-4 w-full rounded-md bg-blue-500 py-2 text-white">submit</button>
-    </form>
+  <div class="mt-3">
+    <app-telegram-login-form />
   </div>
 </p-card>
