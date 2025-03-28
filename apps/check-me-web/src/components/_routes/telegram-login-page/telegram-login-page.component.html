@@ -6,6 +6,12 @@
   >
 
   <div class="mt-3">
-    <app-telegram-login-form [authCodeId]="authCodeId()" [showEnterCodeState]="!!authCodeId()" />
+    <app-telegram-login-form
+      (sendCode)="sendCode($event)"
+      (login)="handleLogin($event)"
+      [showEnterCodeState]="showEnterCodeState()"
+      [isSendingCode]="isSendingCode()"
+      [isLoggingIn]="isLoggingIn()"
+    />
   </div>
 </p-card>
