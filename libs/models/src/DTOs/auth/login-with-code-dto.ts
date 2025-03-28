@@ -1,4 +1,4 @@
-export interface ILoginDTO {
+export interface ILoginWithCodeDTO {
   code: string;
   authCodeId: string;
 }

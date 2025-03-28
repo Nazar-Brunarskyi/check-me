@@ -43,12 +43,20 @@ export class TelegramLoginPageComponent {
           });
         },
         error: () => {
-          console.log('error');
+          console.log('Error sending code');
         },
       });
   }
 
-  handleLogin(data: any): void {
-    console.log(data);
+  handleLogin(code: string): void {
+    const authCodeId = this.authCodeId();
+
+    if (!authCodeId || !code) {
+      console.error('authCodeId or code is missing');
+      return;
+    }
+    this.isLoggingIn.set(true);
+
+    this.authService.loginWithCode({ authCodeId: authCodeId, code }, () => this.isLoggingIn.set(false));
   }
 }

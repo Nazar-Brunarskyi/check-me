@@ -15,11 +15,11 @@ import * as bcrypt from 'bcrypt';
 import { DateTime } from 'luxon';
 import { Model, Types } from 'mongoose';
 import { TelegramCommunicationService } from '../../telegram/services/telegram-communication.service';
-import { LoginResponseDTO } from '../dto/login-response.dto';
-import { LoginDto } from '../dto/login.dto';
-import { RefreshResponseDTO } from '../dto/refresh-response.dto';
-import { SendCodeToTelegramResponseDTO } from '../dto/send-code-to-telegram-response.dto';
-import { SendCodeToTelegramDto } from '../dto/send-code-to-telegram.dto';
+import { LoginResponseDTO } from '../DTOs/login-response.dto';
+import { LoginWithCodeDTO } from '../DTOs/login-with-code.dto';
+import { RefreshResponseDTO } from '../DTOs/refresh-response.dto';
+import { SendCodeToTelegramResponseDTO } from '../DTOs/send-code-to-telegram-response.dto';
+import { SendCodeToTelegramDto } from '../DTOs/send-code-to-telegram.dto';
 
 @Injectable()
 export class AuthService {
@@ -30,6 +30,7 @@ export class AuthService {
     private authCodeModel: Model<IAuthCodeSchema>,
     @InjectModel(UserSchemaDefinition.name)
     private userModel: Model<IUserSchema>,
+
     private jwtService: JwtService,
     private readonly telegramCommunicationService: TelegramCommunicationService,
   ) {}
@@ -67,7 +68,7 @@ export class AuthService {
     return new SendCodeToTelegramResponseDTO({ authCodeId: newAuthCode._id });
   }
 
-  async loginWithCode(loginDto: LoginDto): Promise<ILoginResponseDTO> {
+  async loginWithCode(loginDto: LoginWithCodeDTO): Promise<ILoginResponseDTO> {
     const { code, authCodeId } = loginDto;
 
     if (!Types.ObjectId.isValid(authCodeId)) {

@@ -19,7 +19,7 @@ export class TelegramLoginFormComponent {
   isLoggingIn = input<boolean>(false);
 
   sendCode = output<ISendCodeToTelegramDto>();
-  login = output<any>();
+  login = output<string>();
 
   phoneNumberErrorMessage = signal<string | null>(null);
 
@@ -73,6 +73,11 @@ export class TelegramLoginFormComponent {
   }
 
   handleLogin(): void {
-    this.login.emit({ code: this.codeForm.get('code')?.value });
+    if (this.codeForm.invalid) {
+      console.error('Invalid code form');
+      return;
+    }
+
+    this.login.emit(this.codeForm.get('code')?.value as string);
   }
 }

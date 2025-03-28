@@ -1,2 +1,2 @@
 export * from './create-user-dto';
-export * from './get-user-response-dto';
+export * from './get-me-response-dto';

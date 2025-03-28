@@ -6,8 +6,8 @@ import {
 } from '@check-me/models';
 import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { GetUserFromRequest } from '../../../common/decorators/get-user-from-request.decorator';
-import { LoginDto } from '../dto/login.dto';
-import { SendCodeToTelegramDto } from '../dto/send-code-to-telegram.dto';
+import { LoginWithCodeDTO } from '../DTOs/login-with-code.dto';
+import { SendCodeToTelegramDto } from '../DTOs/send-code-to-telegram.dto';
 import { JwtAccessGuard } from '../guards/jwt-access-guard';
 import { JwtRefreshGuard } from '../guards/jwt-refresh-guard';
 import { AuthService } from '../services/auth.service';
@@ -29,7 +29,7 @@ export class AuthController {
 
   @Post('login-with-code')
   @HttpCode(200)
-  loginWithCode(@Body() loginDto: LoginDto): Promise<ILoginResponseDTO> {
+  loginWithCode(@Body() loginDto: LoginWithCodeDTO): Promise<ILoginResponseDTO> {
     return this.authService.loginWithCode(loginDto);
   }
 

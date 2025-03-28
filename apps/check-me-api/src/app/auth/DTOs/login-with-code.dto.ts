@@ -1,7 +1,7 @@
-import { ILoginDTO } from '@check-me/models';
+import { ILoginWithCodeDTO } from '@check-me/models';
 import { IsNumberString, IsString, Length } from 'class-validator';
 
-export class LoginDto implements ILoginDTO {
+export class LoginWithCodeDTO implements ILoginWithCodeDTO {
   @IsString()
   @Length(6, 6)
   @IsNumberString()
