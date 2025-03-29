@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { authGuard } from '../guards/auth.guard';
 
 export const appRoutes: Route[] = [
   {
@@ -23,6 +24,7 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
+        canActivate: [authGuard],
         loadComponent: () =>
           import('../components/_routes/login-page/login-page.component').then((c) => c.LoginPageComponent),
       },

@@ -1,9 +1,4 @@
-import {
-  IJwtTokenPayload,
-  ILoginResponseDTO,
-  IRefreshResponseDTO,
-  ISendCodeToTelegramResponseDTO,
-} from '@check-me/models';
+import { IJwtTokenPayload, ISendCodeToTelegramResponseDTO, ITokensResponseDTO } from '@check-me/models';
 import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { GetUserFromRequest } from '../../../common/decorators/get-user-from-request.decorator';
 import { LoginWithCodeDTO } from '../DTOs/login-with-code.dto';
@@ -29,14 +24,14 @@ export class AuthController {
 
   @Post('login-with-code')
   @HttpCode(200)
-  loginWithCode(@Body() loginDto: LoginWithCodeDTO): Promise<ILoginResponseDTO> {
+  loginWithCode(@Body() loginDto: LoginWithCodeDTO): Promise<ITokensResponseDTO> {
     return this.authService.loginWithCode(loginDto);
   }
 
   @Post('refresh')
   @HttpCode(200)
   @UseGuards(JwtRefreshGuard)
-  refresh(@GetUserFromRequest() user: IJwtTokenPayload): Promise<IRefreshResponseDTO> {
+  refresh(@GetUserFromRequest() user: IJwtTokenPayload): Promise<ITokensResponseDTO> {
     return this.authService.refresh(user.sub);
   }
 }

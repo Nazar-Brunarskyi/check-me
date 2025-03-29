@@ -1,15 +1,15 @@
-import { ILoginResponseDTO } from '@check-me/models';
+import { ITokensResponseDTO } from '@check-me/models';
 import { Exclude, Expose } from 'class-transformer';
 
 @Exclude()
-export class LoginResponseDTO implements ILoginResponseDTO {
+export class TokensResponseDTO implements ITokensResponseDTO {
   @Expose()
   accessToken: string;
 
   @Expose()
   refreshToken: string;
 
-  constructor(partial: Partial<LoginResponseDTO>) {
+  constructor(partial: Partial<TokensResponseDTO>) {
     Object.assign(this, partial);
   }
 }

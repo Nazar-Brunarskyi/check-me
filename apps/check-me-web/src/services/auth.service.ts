@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ILoginResponseDTO, ILoginWithCodeDTO, IRefreshResponseDTO } from '@check-me/models';
+import { ILoginWithCodeDTO, ITokensResponseDTO } from '@check-me/models';
 import { catchError, finalize, tap, throwError } from 'rxjs';
 import { BaseHttpService } from './base-http.service';
 
@@ -11,7 +11,7 @@ export class AuthService extends BaseHttpService {
   private router = inject(Router);
 
   loginWithCode(data: ILoginWithCodeDTO, finalizeCallback?: () => void) {
-    return this.post<ILoginResponseDTO>('auth/login-with-code', data)
+    return this.post<ITokensResponseDTO>('auth/login-with-code', data)
       .pipe(finalize(() => finalizeCallback?.()))
       .subscribe({
         error: () => {
@@ -24,13 +24,13 @@ export class AuthService extends BaseHttpService {
   }
 
   refresh() {
-    return this.post<IRefreshResponseDTO>(
+    return this.post<ITokensResponseDTO>(
       'auth/refresh',
       {},
       { headers: { Authorization: `Bearer ${this.getTokens.refreshToken}` } },
     ).pipe(
       tap((data) => {
-        localStorage.setItem('accessToken', data.accessToken);
+        this.#saveTokens(data);
       }),
       catchError((error) => {
         this.logout();
@@ -51,7 +51,7 @@ export class AuthService extends BaseHttpService {
     };
   }
 
-  #saveTokens(data: ILoginResponseDTO) {
+  #saveTokens(data: ITokensResponseDTO) {
     localStorage.setItem('accessToken', data.accessToken);
     localStorage.setItem('refreshToken', data.refreshToken);
   }

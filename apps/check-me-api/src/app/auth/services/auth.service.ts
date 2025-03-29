@@ -2,9 +2,8 @@ import { AuthCodeSchemaDefinition, UserSchemaDefinition } from '@check-me/databa
 import {
   IAuthCodeSchema,
   IJwtTokenPayload,
-  ILoginResponseDTO,
-  IRefreshResponseDTO,
   ISendCodeToTelegramResponseDTO,
+  ITokensResponseDTO,
   IUserSchema,
 } from '@check-me/models';
 import { generateSixDigitCode } from '@check-me/utils/auth/generate-six-digit-code';
@@ -15,11 +14,10 @@ import * as bcrypt from 'bcrypt';
 import { DateTime } from 'luxon';
 import { Model, Types } from 'mongoose';
 import { TelegramCommunicationService } from '../../telegram/services/telegram-communication.service';
-import { LoginResponseDTO } from '../DTOs/login-response.dto';
 import { LoginWithCodeDTO } from '../DTOs/login-with-code.dto';
-import { RefreshResponseDTO } from '../DTOs/refresh-response.dto';
 import { SendCodeToTelegramResponseDTO } from '../DTOs/send-code-to-telegram-response.dto';
 import { SendCodeToTelegramDto } from '../DTOs/send-code-to-telegram.dto';
+import { TokensResponseDTO } from '../DTOs/tokens-response.dto';
 
 @Injectable()
 export class AuthService {
@@ -68,7 +66,7 @@ export class AuthService {
     return new SendCodeToTelegramResponseDTO({ authCodeId: newAuthCode._id });
   }
 
-  async loginWithCode(loginDto: LoginWithCodeDTO): Promise<ILoginResponseDTO> {
+  async loginWithCode(loginDto: LoginWithCodeDTO): Promise<ITokensResponseDTO> {
     const { code, authCodeId } = loginDto;
 
     if (!Types.ObjectId.isValid(authCodeId)) {
@@ -99,10 +97,10 @@ export class AuthService {
     const accessToken = this.#generateAccessToken(authCode.user);
     const refreshToken = this.#generateRefreshToken(authCode.user);
 
-    return new LoginResponseDTO({ accessToken, refreshToken });
+    return new TokensResponseDTO({ accessToken, refreshToken });
   }
 
-  async refresh(userId: string): Promise<IRefreshResponseDTO> {
+  async refresh(userId: string): Promise<ITokensResponseDTO> {
     const user = await this.userModel.findById(userId);
 
     if (!user) {
@@ -111,8 +109,9 @@ export class AuthService {
     }
 
     const accessToken = this.#generateAccessToken(user);
+    const refreshToken = this.#generateRefreshToken(user);
 
-    return new RefreshResponseDTO({ accessToken });
+    return new TokensResponseDTO({ accessToken, refreshToken });
   }
 
   #generateAccessToken(user: IUserSchema): string {
@@ -133,6 +132,6 @@ export class AuthService {
     return {
       sub: user._id,
       firstName: user.firstName,
-    };
+    } as IJwtTokenPayload;
   }
 }
