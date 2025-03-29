@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CurrentUserService } from '../../../services/current-user.service';
 
 @Component({
   selector: 'app-login-page',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
-export class LoginPageComponent {}
+export class LoginPageComponent {
+  private currentUserService = inject(CurrentUserService);
+}

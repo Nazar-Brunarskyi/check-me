@@ -43,7 +43,7 @@ export class TelegramLoginPageComponent {
           });
         },
         error: () => {
-          console.log('Error sending code');
+          console.error('Error sending code');
         },
       });
   }
