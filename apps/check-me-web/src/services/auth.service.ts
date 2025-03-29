@@ -19,6 +19,7 @@ export class AuthService extends BaseHttpService {
         },
         next: (data) => {
           this.#saveTokens(data);
+          this.router.navigate(['/']);
         },
       });
   }

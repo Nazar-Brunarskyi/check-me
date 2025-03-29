@@ -1,9 +1,11 @@
 import { Route } from '@angular/router';
 import { authGuard } from '../guards/auth.guard';
+import { canActivateRuthRouteGuard } from '../guards/can-activate-auth-route.guard';
 
 export const appRoutes: Route[] = [
   {
     path: 'auth',
+    canActivate: [canActivateRuthRouteGuard],
     loadComponent: () =>
       import('../components/_layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent),
     children: [
