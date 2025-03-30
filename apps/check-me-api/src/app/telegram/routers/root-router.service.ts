@@ -1,5 +1,6 @@
 import { UserSchemaDefinition } from '@check-me/database';
 import { ITelegramInfo, ITelegramUpdate, IUserSchema } from '@check-me/models';
+import { normalizePhoneNumber } from '@check-me/utils/phone-number/normalize-phone-number';
 import { getChatId } from '@check-me/utils/telegram/get-chat-id';
 import { getTelegramUser } from '@check-me/utils/telegram/get-telegram-user';
 import { Injectable, Logger } from '@nestjs/common';
@@ -101,17 +102,19 @@ export class RootCommandService {
     const canYpdatePhoneNumber = contact.user_id === telegramUser.id;
 
     if (canYpdatePhoneNumber) {
+      const normalizedPhoneNumber = normalizePhoneNumber(contact.phone_number);
+
       const updatedUser = await this.userModel
         .findOneAndUpdate(
           { 'telegramInfo.telegramUserId': telegramUser.id },
-          { $set: { phoneNumber: contact.phone_number } },
+          { $set: { phoneNumber: normalizedPhoneNumber } },
           { new: true },
         )
         .exec();
 
       await this.telegramCommunicationService.sendMessage({
         chat_id: getChatId(data),
-        text: `Your phone number has been set to: <b>${updatedUser.phoneNumber}</b>`,
+        text: `Your phone number has been set to: <code><b>${updatedUser.phoneNumber}</b></code>`,
         parse_mode: 'HTML',
         reply_markup: {
           remove_keyboard: true,

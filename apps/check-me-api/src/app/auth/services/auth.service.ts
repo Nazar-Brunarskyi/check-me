@@ -7,6 +7,7 @@ import {
   IUserSchema,
 } from '@check-me/models';
 import { generateSixDigitCode } from '@check-me/utils/auth/generate-six-digit-code';
+import { normalizePhoneNumber } from '@check-me/utils/phone-number/normalize-phone-number';
 import { BadRequestException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
@@ -35,7 +36,7 @@ export class AuthService {
 
   async sendCodeToTelegram(sendCodeToTelegramDto: SendCodeToTelegramDto): Promise<ISendCodeToTelegramResponseDTO> {
     const { phoneNumber } = sendCodeToTelegramDto;
-    const normalizedPhoneNumber = phoneNumber.split('+')[1];
+    const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber);
     const code = generateSixDigitCode();
     const expiredAt = DateTime.now().plus({ minutes: 5 });
 
@@ -60,7 +61,7 @@ export class AuthService {
     await this.telegramCommunicationService.sendMessage({
       chat_id: user.telegramInfo.chat_id,
       parse_mode: 'HTML',
-      text: `Your code is: <b>${code}</b>`,
+      text: `Your code is: <code><b>${code}</b></code>`,
     });
 
     return new SendCodeToTelegramResponseDTO({ authCodeId: newAuthCode._id });
