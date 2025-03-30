@@ -1,0 +1,6 @@
+.full-h {
+  height: 100vh;
+  &__minus-header {
+    height: calc(100vh - 56px);
+  }
+}

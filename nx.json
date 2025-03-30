@@ -62,7 +62,8 @@
       "unitTestRunner": "none"
     },
     "@nx/angular:component": {
-      "style": "scss"
+      "style": "none",
+      "skipTests": true
     }
   },
   "plugins": [

@@ -1,24 +1,38 @@
 import { ITelegramUpdate } from '@check-me/models';
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { DiscoveryService, Reflector } from '@nestjs/core';
 import { TELEGRAM_COMMAND } from '../decorators/telegram-command.decorator';
 import { TELEGRAM_COMMAND_GROUP } from '../decorators/telegram-group-command.decorator';
 
 @Injectable()
 export class TelegramService implements OnModuleInit {
+  private readonly logger = new Logger(TelegramService.name);
+
   private commandMap = new Map<string, (data: ITelegramUpdate) => Promise<void>>();
 
-  constructor(private readonly discoveryService: DiscoveryService, private readonly reflector: Reflector) {}
+  constructor(
+    private readonly discoveryService: DiscoveryService,
+    private readonly reflector: Reflector,
+  ) {}
 
   onModuleInit() {
     this.#confirmCommands();
-    console.log({ commandMap: this.commandMap });
   }
 
   async handleWebhook(data: ITelegramUpdate): Promise<void> {
-    console.log(data);
+    try {
+      const command = data?.callback_query?.data ?? data?.message?.text;
+      const handler = this.commandMap.get(command);
 
-    return;
+      if (handler) {
+        await handler(data);
+      } else {
+        const defaultHandler = this.commandMap.get('_');
+        await defaultHandler(data);
+      }
+    } catch (error) {
+      this.logger.error(`Failed to handle webhook: ${error.message}`, error.stack);
+    }
   }
 
   #confirmCommands() {

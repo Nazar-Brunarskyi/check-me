@@ -7,6 +7,9 @@ export const getAngularThemeProviders = () => [
   providePrimeNG({
     theme: {
       preset: theme,
+      options: {
+        darkModeSelector: '.check-me-dark',
+      },
     },
   }),
 ];

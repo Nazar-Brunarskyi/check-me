@@ -1,0 +1,24 @@
+.link {
+  color: theme('colors.app-elemental-500');
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: theme('colors.app-elemental-400');
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px dashed theme('colors.app-elemental-300'); // 400
+    outline-offset: 2px;
+  }
+
+  &:visited {
+    color: theme('colors.app-elemental-700'); // 700
+  }
+
+  &:active {
+    color: theme('colors.app-elemental-800'); // 800
+  }
+}

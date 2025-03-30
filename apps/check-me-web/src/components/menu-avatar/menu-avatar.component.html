@@ -1,0 +1,6 @@
+<div [ngClass]="{ 'border border-red-500': false }">
+  <button (click)="menu.toggle($event)">
+    <p-avatar [ngClass]="{ 'pi pi-user': !avatarLabel() }" [label]="avatarLabel()" />
+  </button>
+  <p-menu #menu [model]="items" [popup]="true" />
+</div>

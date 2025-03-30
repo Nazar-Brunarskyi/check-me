@@ -1,0 +1,39 @@
+<div>
+  @if (showEnterCodeState()) {
+    <form [formGroup]="codeForm" (ngSubmit)="handleLogin()">
+      <app-code-input
+        codeInputclass="flex justify-between"
+        formControlName="code"
+        name="code"
+        label="Code"
+        ghostText="Enter code our bot send you on telegram"
+        size="large"
+        [length]="6"
+      />
+
+      <p-button
+        [loading]="isLoggingIn()"
+        [disabled]="codeForm.invalid"
+        type="submit"
+        [style]="{ width: '100%', marginTop: '20px' }"
+      >
+        login</p-button
+      >
+    </form>
+  } @else {
+    <form class="flex flex-col gap-y-6" [formGroup]="telegramLoginForm" (ngSubmit)="handleSendCode()">
+      <app-input
+        formControlName="phoneNumber"
+        name="phoneNumber"
+        type="number"
+        label="Phone number"
+        placeholder="Enter your phone number"
+        ghostText="Enter your full phone number in international format (country code + number)"
+        [errorMesaage]="phoneNumberErrorMessage()"
+        [invalid]="!!phoneNumberErrorMessage()"
+      />
+
+      <p-button [loading]="isSendingCode()" type="submit" [style]="{ width: '100%' }">Send code</p-button>
+    </form>
+  }
+</div>

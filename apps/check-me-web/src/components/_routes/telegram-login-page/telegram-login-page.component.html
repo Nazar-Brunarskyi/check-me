@@ -1,0 +1,17 @@
+<p-card>
+  <ng-template #title>Telegram</ng-template>
+  <ng-template #subtitle
+    >To log in via Telegram, make sure to use our telegram bot
+    <a class="link" href="https://t.me/check_me_test_836_bot" target="_blank">our telegram bot</a></ng-template
+  >
+
+  <div class="mt-3">
+    <app-telegram-login-form
+      (sendCode)="sendCode($event)"
+      (login)="handleLogin($event)"
+      [showEnterCodeState]="showEnterCodeState()"
+      [isSendingCode]="isSendingCode()"
+      [isLoggingIn]="isLoggingIn()"
+    />
+  </div>
+</p-card>

@@ -1,0 +1,14 @@
+{
+  "name": "@check-me/utils",
+  "version": "0.0.1",
+  "private": true,
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "dependencies": {
+    "@check-me/models": "*",
+    "jwt-decode": "^4.0.0",
+    "luxon": "^3.6.0",
+    "tslib": "^2.3.0"
+  }
+}
