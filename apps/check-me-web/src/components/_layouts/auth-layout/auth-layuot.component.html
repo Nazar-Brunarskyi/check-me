@@ -1,3 +1,10 @@
-<main class="full-h flex items-center justify-center">
-  <router-outlet />
+<main class="full-h flex flex-col">
+  <header class="h-14">
+    <div class="container flex h-full items-center">
+      <app-check-me-logo navigateTo="/" />
+    </div>
+  </header>
+  <div class="full-h__minus-header flex items-center justify-center">
+    <router-outlet />
+  </div>
 </main>
