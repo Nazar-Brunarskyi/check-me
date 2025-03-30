@@ -10,6 +10,7 @@
       [class]="codeInputclass()"
       (input)="onInput($event)"
       (blur)="onTouched()"
+      (paste)="onPaste($event)"
       [disabled]="disabled()"
       [integerOnly]="true"
       [ngClass]="{ error: invalid() }"

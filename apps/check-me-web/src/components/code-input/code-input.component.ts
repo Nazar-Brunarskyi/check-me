@@ -38,6 +38,10 @@ export class CodeInputComponent implements ControlValueAccessor {
     this.onChange(this.value);
   }
 
+  onPaste(event: ClipboardEvent): void {
+    this.onChange(this.value);
+  }
+
   writeValue(value: string): void {
     this.value = value || '';
   }
