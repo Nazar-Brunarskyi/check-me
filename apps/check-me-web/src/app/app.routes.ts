@@ -7,7 +7,7 @@ export const appRoutes: Route[] = [
     path: 'auth',
     canActivate: [canActivateRuthRouteGuard],
     loadComponent: () =>
-      import('../components/_layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent),
+      import('../shared/_layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent),
     children: [
       {
         path: '',
@@ -20,7 +20,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     loadComponent: () =>
-      import('../components/_layouts/base-layout/base-layout.component').then((c) => c.BaseLayoutComponent),
+      import('../shared/_layouts/base-layout/base-layout.component').then((c) => c.BaseLayoutComponent),
     children: [
       {
         path: '',
