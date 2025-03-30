@@ -8,7 +8,7 @@ import { Toast } from 'primeng/toast';
   selector: 'app-root',
   template: `
     <router-outlet></router-outlet>
-    <p-toast position="bottom-right"  />
+    <p-toast position="bottom-right" />
   `,
 })
 export class AppComponent {}
