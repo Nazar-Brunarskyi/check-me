@@ -1,6 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { ILoginWithCodeDTO, ITokensResponseDTO } from '@check-me/models';
+import { IJwtTokenPayload, ILoginWithCodeDTO, ITokensResponseDTO } from '@check-me/models';
+import { decodeToken } from '@check-me/utils/auth/JWT/decode-token';
 import { catchError, finalize, tap, throwError } from 'rxjs';
 import { BaseHttpService } from './base-http.service';
 
@@ -9,6 +10,17 @@ import { BaseHttpService } from './base-http.service';
 })
 export class AuthService extends BaseHttpService {
   private router = inject(Router);
+
+  public user = signal<IJwtTokenPayload | null>(null);
+
+  constructor() {
+    super();
+    const { accessToken } = this.getTokens;
+
+    if (accessToken) {
+      this.user.set(decodeToken(accessToken));
+    }
+  }
 
   loginWithCode(data: ILoginWithCodeDTO, finalizeCallback?: () => void) {
     return this.post<ITokensResponseDTO>('auth/login-with-code', data)
@@ -45,6 +57,15 @@ export class AuthService extends BaseHttpService {
     this.router.navigate(['/auth']);
   }
 
+  get userPayload() {
+    const accessToken = this.getTokens.accessToken;
+    if (accessToken) {
+      return decodeToken(accessToken);
+    }
+
+    return null;
+  }
+
   get getTokens() {
     return {
       accessToken: localStorage.getItem('accessToken'),
@@ -55,10 +76,14 @@ export class AuthService extends BaseHttpService {
   #saveTokens(data: ITokensResponseDTO) {
     localStorage.setItem('accessToken', data.accessToken);
     localStorage.setItem('refreshToken', data.refreshToken);
+
+    this.user.set(decodeToken(data.accessToken));
   }
 
   #removeTokens() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+
+    this.user.set(null);
   }
 }

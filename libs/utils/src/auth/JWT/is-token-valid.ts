@@ -6,6 +6,11 @@ export const isTokenValid = (token: string): boolean => {
   if (!decodedToken) {
     return false;
   }
+
+  if (!decodedToken.exp) {
+    return false;
+  }
+
   const expirationTime = DateTime.fromSeconds(decodedToken.exp);
   const now = DateTime.now();
   return expirationTime > now;

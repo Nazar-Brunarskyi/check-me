@@ -1,6 +1,7 @@
 export interface IJwtTokenPayload {
   sub: string;
   firstName: string;
-  iat: number;
-  exp: number;
+  lastName?: string;
+  iat?: number;
+  exp?: number;
 }

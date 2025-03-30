@@ -132,6 +132,7 @@ export class AuthService {
     return {
       sub: user._id,
       firstName: user.firstName,
-    } as IJwtTokenPayload;
+      lastName: user.lastName,
+    };
   }
 }
