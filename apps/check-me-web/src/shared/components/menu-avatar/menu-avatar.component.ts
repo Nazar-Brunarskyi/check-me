@@ -5,7 +5,6 @@ import { AvatarModule } from 'primeng/avatar';
 import { Menu } from 'primeng/menu';
 import { AuthService } from '../../services/auth.service';
 
-
 @Component({
   selector: 'app-menu-avatar',
   imports: [CommonModule, AvatarModule, Menu],

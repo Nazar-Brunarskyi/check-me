@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { AuthService } from '../../services/auth.service';
 import { CheckMeLogoComponent } from '../check-me-logo/check-me-logo.component';
 import { MenuAvatarComponent } from '../menu-avatar/menu-avatar.component';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ISendCodeToTelegramDto, ISendCodeToTelegramResponseDTO } from '@check-me/models';
 import { BaseHttpService } from '../../../../shared/services/base-http.service';
 
-
 @Injectable({
   providedIn: 'root',
 })
