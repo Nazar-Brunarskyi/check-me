@@ -24,7 +24,6 @@ export class MenuAvatarComponent {
     const lastNameFirstLetter = lastName?.charAt(0);
 
     const label = `${firstNameFirstLetter || ''}${lastNameFirstLetter || ''}`;
-    console.log(label || undefined);
 
     return label || undefined;
   });
