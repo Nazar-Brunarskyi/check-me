@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Injectable, inject } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ENVIRONMENT_CONFIG } from '../../injection-tokens/environment.token';
+import { ENVIRONMENT_CONFIG } from '../injection-tokens/environment.token';
 
 interface IReqOptions {
   params?: HttpParams;

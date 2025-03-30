@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { authGuard } from '../guards/auth.guard';
-import { canActivateRuthRouteGuard } from '../guards/can-activate-auth-route.guard';
+import { authGuard } from '../shared/guards/auth.guard';
+import { canActivateRuthRouteGuard } from '../shared/guards/can-activate-auth-route.guard';
 
 export const appRoutes: Route[] = [
   {
@@ -13,9 +13,7 @@ export const appRoutes: Route[] = [
         path: '',
         // path: 'telegram-login',
         loadComponent: () =>
-          import('../components/_routes/telegram-login-page/telegram-login-page.component').then(
-            (c) => c.TelegramLoginPageComponent,
-          ),
+          import('./auth/telegram-login-page/telegram-login-page.component').then((c) => c.TelegramLoginPageComponent),
       },
     ],
   },
@@ -27,13 +25,11 @@ export const appRoutes: Route[] = [
       {
         path: '',
         canActivate: [authGuard],
-        loadComponent: () =>
-          import('../components/_routes/main-page/main-page.component').then((c) => c.MainPageComponent),
+        loadComponent: () => import('./main-page/main-page.component').then((c) => c.MainPageComponent),
       },
       {
         path: '**',
-        loadComponent: () =>
-          import('../components/_routes/not-found-page/not-found-page.component').then((c) => c.NotFoundPageComponent),
+        loadComponent: () => import('./not-found-page/not-found-page.component').then((c) => c.NotFoundPageComponent),
       },
     ],
   },

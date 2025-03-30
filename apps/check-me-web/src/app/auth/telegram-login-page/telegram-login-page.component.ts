@@ -5,9 +5,9 @@ import { ISendCodeToTelegramDto } from '@check-me/models';
 import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { finalize } from 'rxjs';
+import { TelegramLoginFormComponent } from '../../../components/forms/telegram-login-form/telegram-login-form.component';
 import { TelegramLoginService } from '../../../services/telegram-login.service';
 import { AuthService } from '../../../shared/services/auth.service';
-import { TelegramLoginFormComponent } from '../../forms/telegram-login-form/telegram-login-form.component';
 
 @Component({
   selector: 'app-telegram-login-page',
