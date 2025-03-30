@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ISendCodeToTelegramDto } from '@check-me/models';
+import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { finalize } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
@@ -17,6 +18,7 @@ export class TelegramLoginPageComponent {
   private router = inject(Router);
   private telegramLoginService = inject(TelegramLoginService);
   private authService = inject(AuthService);
+  private messageService = inject(MessageService);
 
   authCodeId = input<string>();
 
@@ -43,7 +45,11 @@ export class TelegramLoginPageComponent {
           });
         },
         error: () => {
-          console.error('Error sending code');
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Failed to send code',
+            detail: 'Check the number, please, and try again.',
+          });
         },
       });
   }
@@ -57,6 +63,26 @@ export class TelegramLoginPageComponent {
     }
     this.isLoggingIn.set(true);
 
-    this.authService.loginWithCode({ authCodeId: authCodeId, code }, () => this.isLoggingIn.set(false));
+    this.authService
+      .loginWithCode({ authCodeId: authCodeId, code })
+      .pipe(finalize(() => this.isLoggingIn.set(false)))
+      .subscribe({
+        error: (error) => {
+          if (error.status === 401) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Failed to login',
+              detail: 'Invalid code. Please try again',
+            });
+            return;
+          }
+
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'An error occurred while processing your request. Please try again.',
+          });
+        },
+      });
   }
 }

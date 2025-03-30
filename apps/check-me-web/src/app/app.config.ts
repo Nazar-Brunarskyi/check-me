@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 import { ENVIRONMENT_CONFIG } from '../injection-tokens/environment.token';
 import { authInterceptor } from '../interceptors/auth.interceptors';
 import { appRoutes } from './app.routes';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes, withComponentInputBinding()),
+    MessageService,
     ...getAngularThemeProviders(),
   ],
 };

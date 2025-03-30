@@ -42,6 +42,6 @@ export class BaseHttpService {
       errorMessage = `Server-side error: ${error.status} ${error.message}`;
     }
     console.error(errorMessage);
-    return throwError(() => new Error(errorMessage));
+    return throwError(() => error);
   }
 }

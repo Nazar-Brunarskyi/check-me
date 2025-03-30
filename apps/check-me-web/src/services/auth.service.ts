@@ -2,7 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { IJwtTokenPayload, ILoginWithCodeDTO, ITokensResponseDTO } from '@check-me/models';
 import { decodeToken } from '@check-me/utils/auth/JWT/decode-token';
-import { catchError, finalize, tap, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { BaseHttpService } from './base-http.service';
 
 @Injectable({
@@ -22,18 +22,13 @@ export class AuthService extends BaseHttpService {
     }
   }
 
-  loginWithCode(data: ILoginWithCodeDTO, finalizeCallback?: () => void) {
-    return this.post<ITokensResponseDTO>('auth/login-with-code', data)
-      .pipe(finalize(() => finalizeCallback?.()))
-      .subscribe({
-        error: () => {
-          console.error('Error logging in');
-        },
-        next: (data) => {
-          this.#saveTokens(data);
-          this.router.navigate(['/']);
-        },
-      });
+  loginWithCode(data: ILoginWithCodeDTO) {
+    return this.post<ITokensResponseDTO>('auth/login-with-code', data).pipe(
+      tap((data) => {
+        this.#saveTokens(data);
+        this.router.navigate(['/']);
+      }),
+    );
   }
 
   refresh() {
