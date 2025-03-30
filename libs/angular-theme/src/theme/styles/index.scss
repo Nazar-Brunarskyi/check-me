@@ -1,13 +1,18 @@
 // imports
+
 @use './container.scss';
 @use './full-screen.scss';
 @use './link.scss';
 @use './input-number-reset.scss';
 
+// icons
+@import "primeicons/primeicons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "primeicons/primeicons.css";
+
+
 /* You can add global styles to this file, and also import other style files */
 html {
   font-family:
