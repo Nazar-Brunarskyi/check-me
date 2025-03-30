@@ -3,7 +3,8 @@ import { Component, computed, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { Menu } from 'primeng/menu';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-menu-avatar',

@@ -3,8 +3,8 @@ import { Component, inject, input, output, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ISendCodeToTelegramDto } from '@check-me/models';
 import { ButtonModule } from 'primeng/button';
-import { CodeInputComponent } from '../../code-input/code-input.component';
-import { InputComponent } from '../../input/input.component';
+import { CodeInputComponent } from '../../../../../shared/components/code-input/code-input.component';
+import { InputComponent } from '../../../../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-telegram-login-form',
